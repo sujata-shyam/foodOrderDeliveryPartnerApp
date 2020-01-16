@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aDi-dA-cD1">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--loginViewController-->
+        <scene sceneID="17s-vw-vE1">
+            <objects>
+                <viewController id="aDi-dA-cD1" userLabel="loginViewController" customClass="loginViewController" customModule="foodOrderDeliveryPartnerApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dsa-bE-73W">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="KHp-kY-OX8" userLabel="imgView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Good Food Delivery Partner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRs-Mm-nPc" userLabel="lblTitle">
+                                <rect key="frame" x="20" y="64" width="374" height="50"/>
+                                <color key="backgroundColor" name="White Smoke"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="O6m-yb-H5y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="20"/>
+                                <color key="textColor" name="Fire Brick"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WpR-33-MQk" userLabel="viewLogin">
+                                <rect key="frame" x="20" y="291" width="374" height="314"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7E9-ON-wVZ" userLabel="lblLogin">
+                                        <rect key="frame" x="10" y="10" width="354" height="50"/>
+                                        <color key="backgroundColor" name="Rosy Brown"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Ow7-Wi-AEc"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="ZVW-kl-6AS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone No.:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aiv-5v-RRJ" userLabel="txtPhone">
+                                        <rect key="frame" x="10" y="70" width="354" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="JRY-XI-MCO"/>
+                                            <constraint firstAttribute="height" constant="40" id="dk3-3D-bzy"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" textContentType="tel"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zym-UW-2xT" userLabel="txtPassword">
+                                        <rect key="frame" x="10" y="120" width="354" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="9oA-rq-RNn"/>
+                                            <constraint firstAttribute="height" constant="40" id="je3-c4-TmD"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQK-Pq-6hy" userLabel="btnLogin">
+                                        <rect key="frame" x="157" y="170" width="60" height="36"/>
+                                        <color key="backgroundColor" name="Tan"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="ACF-ig-dUF"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="s4G-CR-wAu"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <state key="normal" title="Login">
+                                            <color key="titleColor" name="Fire Brick"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="btnLoginTapped:" destination="aDi-dA-cD1" eventType="touchUpInside" id="ogZ-6O-8Af"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pjl-ok-1yP">
+                                        <rect key="frame" x="231" y="284" width="133" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="act-MS-RB8"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="vLL-yU-xwQ"/>
+                                        </constraints>
+                                        <state key="normal" title="New User? Sign Up"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="White Smoke"/>
+                                <constraints>
+                                    <constraint firstItem="Zym-UW-2xT" firstAttribute="top" secondItem="aiv-5v-RRJ" secondAttribute="bottom" constant="10" id="1PT-oQ-RGq"/>
+                                    <constraint firstItem="aiv-5v-RRJ" firstAttribute="top" secondItem="7E9-ON-wVZ" secondAttribute="bottom" constant="10" id="4ab-jO-zKx"/>
+                                    <constraint firstItem="aiv-5v-RRJ" firstAttribute="leading" secondItem="WpR-33-MQk" secondAttribute="leading" constant="10" id="70m-Sd-1gp"/>
+                                    <constraint firstAttribute="bottom" secondItem="pjl-ok-1yP" secondAttribute="bottom" id="AKO-Tu-KMb"/>
+                                    <constraint firstAttribute="trailing" secondItem="pjl-ok-1yP" secondAttribute="trailing" constant="10" id="ETN-QZ-uI0"/>
+                                    <constraint firstItem="Zym-UW-2xT" firstAttribute="top" secondItem="aiv-5v-RRJ" secondAttribute="bottom" constant="10" id="F11-zx-Oga"/>
+                                    <constraint firstItem="Zym-UW-2xT" firstAttribute="leading" secondItem="WpR-33-MQk" secondAttribute="leading" constant="10" id="FKy-XE-n36"/>
+                                    <constraint firstItem="7E9-ON-wVZ" firstAttribute="top" secondItem="WpR-33-MQk" secondAttribute="top" constant="10" id="Ioj-dM-9io"/>
+                                    <constraint firstItem="mQK-Pq-6hy" firstAttribute="top" secondItem="Zym-UW-2xT" secondAttribute="bottom" constant="10" id="OhH-x5-hWe"/>
+                                    <constraint firstAttribute="trailing" secondItem="Zym-UW-2xT" secondAttribute="trailing" constant="10" id="OiJ-DQ-oj0"/>
+                                    <constraint firstItem="pjl-ok-1yP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WpR-33-MQk" secondAttribute="leading" constant="20" symbolic="YES" id="gAy-FL-b7Q"/>
+                                    <constraint firstItem="mQK-Pq-6hy" firstAttribute="centerX" secondItem="WpR-33-MQk" secondAttribute="centerX" id="gcX-b5-pwv"/>
+                                    <constraint firstItem="aiv-5v-RRJ" firstAttribute="top" secondItem="7E9-ON-wVZ" secondAttribute="bottom" constant="10" id="krq-kx-cuN"/>
+                                    <constraint firstItem="7E9-ON-wVZ" firstAttribute="leading" secondItem="WpR-33-MQk" secondAttribute="leading" constant="10" id="wet-Ap-dGw"/>
+                                    <constraint firstAttribute="trailing" secondItem="7E9-ON-wVZ" secondAttribute="trailing" constant="10" id="wnD-bq-Lb4"/>
+                                    <constraint firstAttribute="trailing" secondItem="aiv-5v-RRJ" secondAttribute="trailing" constant="10" id="yFb-8u-YIH"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGW-XF-2Yh" userLabel="btnLogout">
+                                <rect key="frame" x="166" y="812" width="82" height="30"/>
+                                <color key="backgroundColor" name="White Smoke"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="9Cv-OM-C1b"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="N83-Cv-iz8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="tintColor" name="Fire Brick"/>
+                                <state key="normal" title="LOGOUT"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" name="White Smoke"/>
+                        <constraints>
+                            <constraint firstItem="WpR-33-MQk" firstAttribute="height" secondItem="dsa-bE-73W" secondAttribute="height" multiplier="0.35" id="9Yh-Dt-FQZ"/>
+                            <constraint firstItem="WpR-33-MQk" firstAttribute="trailing" secondItem="0FL-KH-fOe" secondAttribute="trailing" constant="-20" id="AAP-Pa-Y2w"/>
+                            <constraint firstItem="PRs-Mm-nPc" firstAttribute="leading" secondItem="0FL-KH-fOe" secondAttribute="leading" constant="20" id="CrL-Cg-gZz"/>
+                            <constraint firstItem="PRs-Mm-nPc" firstAttribute="top" secondItem="0FL-KH-fOe" secondAttribute="top" constant="20" id="GBp-KH-I3y"/>
+                            <constraint firstAttribute="bottom" secondItem="KHp-kY-OX8" secondAttribute="bottom" id="KP9-nx-si8"/>
+                            <constraint firstItem="0FL-KH-fOe" firstAttribute="trailing" secondItem="PRs-Mm-nPc" secondAttribute="trailing" constant="20" id="P75-xO-WPl"/>
+                            <constraint firstItem="XGW-XF-2Yh" firstAttribute="centerX" secondItem="dsa-bE-73W" secondAttribute="centerX" id="PaD-tp-jl4"/>
+                            <constraint firstItem="WpR-33-MQk" firstAttribute="centerY" secondItem="dsa-bE-73W" secondAttribute="centerY" id="ZtA-YX-5fr"/>
+                            <constraint firstItem="KHp-kY-OX8" firstAttribute="leading" secondItem="0FL-KH-fOe" secondAttribute="leading" id="pxl-a9-y0o"/>
+                            <constraint firstItem="0FL-KH-fOe" firstAttribute="trailing" secondItem="KHp-kY-OX8" secondAttribute="trailing" id="pyh-Sb-vci"/>
+                            <constraint firstItem="WpR-33-MQk" firstAttribute="leading" secondItem="0FL-KH-fOe" secondAttribute="leading" constant="20" id="weL-Cu-dZ2"/>
+                            <constraint firstItem="0FL-KH-fOe" firstAttribute="bottom" secondItem="XGW-XF-2Yh" secondAttribute="bottom" constant="20" id="xzx-gM-6dL"/>
+                            <constraint firstItem="KHp-kY-OX8" firstAttribute="top" secondItem="0FL-KH-fOe" secondAttribute="top" id="yYo-fY-uMT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0FL-KH-fOe"/>
+                    </view>
+                    <connections>
+                        <outlet property="lblTitle" destination="PRs-Mm-nPc" id="uKx-T9-Ia2"/>
+                        <outlet property="txtPassword" destination="Zym-UW-2xT" id="NiQ-fb-d39"/>
+                        <outlet property="txtPhone" destination="aiv-5v-RRJ" id="WPb-bG-seN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YV4-Ds-CY1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3963.7681159420295" y="65.625"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background" width="305" height="433"/>
+        <namedColor name="Fire Brick">
+            <color red="0.73725490196078436" green="0.19215686274509805" blue="0.082352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Rosy Brown">
+            <color red="0.69411764705882351" green="0.53725490196078429" blue="0.55686274509803924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Tan">
+            <color red="0.80784313725490198" green="0.74509803921568629" blue="0.46274509803921571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="White Smoke">
+            <color red="0.93725490196078431" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
