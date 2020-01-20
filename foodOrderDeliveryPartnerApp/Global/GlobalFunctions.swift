@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import CoreLocation
+
+let defaults = UserDefaults.standard
+let locationManager = CLLocationManager()
 
 func displayAlert(vc: UIViewController, title: String, message: String)
 {

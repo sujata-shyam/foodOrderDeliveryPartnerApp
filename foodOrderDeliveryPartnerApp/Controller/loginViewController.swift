@@ -7,20 +7,8 @@
 //
 
 import UIKit
-import SocketIO
+//import SocketIO
 import CoreLocation
-
-//struct Location : SocketData
-//{
-//    var latitude: String
-//    var longitude: String
-//
-//    func socketRepresentation() -> SocketData
-//    {
-//        return ["latitude": latitude, "longitude": longitude]
-//    }
-//}
-
 
 class loginViewController: UIViewController
 {
@@ -28,14 +16,9 @@ class loginViewController: UIViewController
     @IBOutlet weak var txtPhone: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     
-    let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true), .compress])
-    
-    var socket:SocketIOClient!
-
-    let locationManager = CLLocationManager()
-    
-    //var currentLocation : CLLocation!
-    //var location: Location?
+//    let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true), .compress])
+//    var socket:SocketIOClient!
+    //let locationManager = CLLocationManager()
     
     override func viewDidLoad()
     {
@@ -71,6 +54,15 @@ class loginViewController: UIViewController
         txtPhone.delegate = self
         txtPassword.delegate = self
     }
+    
+    func clearUIFields()
+    {
+        self.txtPhone.text = nil
+        self.txtPassword.text = nil
+    }
+    
+    @IBAction func unwindTologinVC(segue:UIStoryboardSegue)
+    {}
     
     @IBAction func btnLoginTapped(_ sender: UIButton)
     {
@@ -119,16 +111,23 @@ class loginViewController: UIViewController
 
                 if loginResponse.id != nil
                 {
-                    self.socket = self.manager.defaultSocket
+//                    self.socket = self.manager.defaultSocket
                     
                     if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
                         CLLocationManager.authorizationStatus() == .authorizedAlways)
                     {
-                        self.setSocketEvents(loginResponse.id!)
+                        //self.setSocketEvents(loginResponse.id!)
                         //self.closeSocketConnection()
+                        
+                        self.saveUserDetailsLocally(loginResponse)
+                        
                         DispatchQueue.main.async
                         {
-                            displayAlert(vc: self, title: "", message: "Login Successful")
+                            //displayAlert(vc: self, title: "", message: "Login Successful")
+                           
+                            self.clearUIFields()
+                            
+                            self.performSegue(withIdentifier: "goToOrderDetails", sender: self)
                         }
                     }
                     else
@@ -154,6 +153,15 @@ class loginViewController: UIViewController
         }.resume()
     }
     
+    func saveUserDetailsLocally(_ loginResponse: LoginResponse)
+    {
+        defaults.set(loginResponse.msg, forKey: "userMessage")
+        defaults.set(loginResponse.session, forKey: "userSession")
+        defaults.set(loginResponse.id, forKey: "userId")
+        defaults.set(loginResponse.phone, forKey: "userPhone")
+        defaults.set(true, forKey: "isUserLoggedIn")
+    }
+    
     func displayAlertForSettings()
     {
         let alertController = UIAlertController (title: "The app needs access to your location to function.", message: "Go to Settings?", preferredStyle: .alert)
@@ -176,45 +184,48 @@ class loginViewController: UIViewController
         present(alertController, animated: true, completion: nil)
     }
     
-    //MARK:- Socket functions
+   
     
-    private func setSocketEvents(_ deliveryPersonId:String)
-    {
-        self.socket.on(clientEvent: .connect) { (data, ack) in
-            print(data)
-            print("Socket connected")
-            self.socket.emit("active delivery partner", deliveryPersonId)
-            
-            let dpLocation = [
-                "location" : [
-                    "latitude": self.locationManager.location?.coordinate.latitude,
-                    "longitude": self.locationManager.location?.coordinate.longitude,
-                ]
-            ]
-            self.socket.emit("updateUserInfo", dpLocation)
-            
-
-            //if let newLocation = self.location
-            //{
-                //self.socket.emit("update location", with: newLocation)
-                //self.socket.emit("update location", "newLocation")
-                //socket.emit("myEvent", CustomData(name: "Erik", age: 24))
-                //self.socket.emit("update location", newLocation)
-            //}
-            
-            
-        }
-        
-        self.socket.on("new task") { data, ack in
-            print(data)
-        }
     
-        self.socket.connect()
-    }
-    
-    private func closeSocketConnection() {
-        self.socket.disconnect()
-    }
+//    //MARK:- Socket functions
+//    
+//    private func setSocketEvents(_ deliveryPersonId:String)
+//    {
+//        self.socket.on(clientEvent: .connect) { (data, ack) in
+//            print(data)
+//            print("Socket connected")
+//            self.socket.emit("active delivery partner", deliveryPersonId)
+//            
+//            let dpLocation = [
+//                "location" : [
+//                    "latitude": self.locationManager.location?.coordinate.latitude,
+//                    "longitude": self.locationManager.location?.coordinate.longitude,
+//                ]
+//            ]
+//            self.socket.emit("updateUserInfo", dpLocation)
+//            
+//
+//            //if let newLocation = self.location
+//            //{
+//                //self.socket.emit("update location", with: newLocation)
+//                //self.socket.emit("update location", "newLocation")
+//                //socket.emit("myEvent", CustomData(name: "Erik", age: 24))
+//                //self.socket.emit("update location", newLocation)
+//            //}
+//            
+//            
+//        }
+//        
+//        self.socket.on("new task") { data, ack in
+//            print(data)
+//        }
+//    
+//        self.socket.connect()
+//    }
+//    
+//    private func closeSocketConnection() {
+//        self.socket.disconnect()
+//    }
 }
 
 extension loginViewController:UITextFieldDelegate
