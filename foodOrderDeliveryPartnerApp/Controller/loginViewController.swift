@@ -7,6 +7,20 @@
 //
 
 import UIKit
+import SocketIO
+import CoreLocation
+
+//struct Location : SocketData
+//{
+//    var latitude: String
+//    var longitude: String
+//
+//    func socketRepresentation() -> SocketData
+//    {
+//        return ["latitude": latitude, "longitude": longitude]
+//    }
+//}
+
 
 class loginViewController: UIViewController
 {
@@ -14,16 +28,44 @@ class loginViewController: UIViewController
     @IBOutlet weak var txtPhone: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     
+    let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true), .compress])
+    
+    var socket:SocketIOClient!
+
+    let locationManager = CLLocationManager()
+    
+    //var currentLocation : CLLocation!
+    //var location: Location?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        lblTitle.layer.cornerRadius = 10
-        lblTitle.layer.masksToBounds = true
-        
+        setTitleLabelUI()
         setTextDelegate()
+        
+        locationManager.requestAlwaysAuthorization()
+        //getCurrentLocation()
     }
 
+    func setTitleLabelUI()
+    {
+        lblTitle.layer.cornerRadius = 10
+        lblTitle.layer.masksToBounds = true
+    }
+    
+//    func getCurrentLocation()
+//    {
+//
+//        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+//            CLLocationManager.authorizationStatus() == .authorizedAlways)
+//        {
+//
+//            print(locationManager.location?.coordinate.latitude)
+//            print(locationManager.location?.coordinate.longitude)
+//        }
+//    }
+    
     func setTextDelegate()
     {
         txtPhone.delegate = self
@@ -32,9 +74,9 @@ class loginViewController: UIViewController
     
     @IBAction func btnLoginTapped(_ sender: UIButton)
     {
-        if(txtPhone.text!.isEmpty)
+        if(txtPhone.text!.isEmpty || txtPassword.text!.isEmpty)
         {
-            displayAlert(vc: self, title: "", message: "Please enter the phone no.")
+            displayAlert(vc: self, title: "", message: "Please enter the details.")
         }
         else
         {
@@ -64,9 +106,6 @@ class loginViewController: UIViewController
         URLSession.shared.dataTask(with: searchURLRequest){ data, response,error in
             guard let data =  data else { return }
             
-            //let received = String(data: data, encoding: String.Encoding.utf8)
-            //print("received: \(received)")
-            
             do
             {
                 guard let response = response as? HTTPURLResponse,
@@ -80,10 +119,25 @@ class loginViewController: UIViewController
 
                 if loginResponse.id != nil
                 {
-                    DispatchQueue.main.async
+                    self.socket = self.manager.defaultSocket
+                    
+                    if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+                        CLLocationManager.authorizationStatus() == .authorizedAlways)
                     {
-                        displayAlert(vc: self, title: "", message: "Login Successful")
+                        self.setSocketEvents(loginResponse.id!)
+                        //self.closeSocketConnection()
+                        DispatchQueue.main.async
+                        {
+                            displayAlert(vc: self, title: "", message: "Login Successful")
+                        }
                     }
+                    else
+                    {
+                        DispatchQueue.main.async
+                        {
+                            self.displayAlertForSettings()
+                        }
+                    }                    
                 }
                 else
                 {
@@ -100,6 +154,67 @@ class loginViewController: UIViewController
         }.resume()
     }
     
+    func displayAlertForSettings()
+    {
+        let alertController = UIAlertController (title: "The app needs access to your location to function.", message: "Go to Settings?", preferredStyle: .alert)
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                    print("Settings opened: \(success)") // Prints true
+                })
+            }
+        }
+        alertController.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    //MARK:- Socket functions
+    
+    private func setSocketEvents(_ deliveryPersonId:String)
+    {
+        self.socket.on(clientEvent: .connect) { (data, ack) in
+            print(data)
+            print("Socket connected")
+            self.socket.emit("active delivery partner", deliveryPersonId)
+            
+            let dpLocation = [
+                "location" : [
+                    "latitude": self.locationManager.location?.coordinate.latitude,
+                    "longitude": self.locationManager.location?.coordinate.longitude,
+                ]
+            ]
+            self.socket.emit("updateUserInfo", dpLocation)
+            
+
+            //if let newLocation = self.location
+            //{
+                //self.socket.emit("update location", with: newLocation)
+                //self.socket.emit("update location", "newLocation")
+                //socket.emit("myEvent", CustomData(name: "Erik", age: 24))
+                //self.socket.emit("update location", newLocation)
+            //}
+            
+            
+        }
+        
+        self.socket.on("new task") { data, ack in
+            print(data)
+        }
+    
+        self.socket.connect()
+    }
+    
+    private func closeSocketConnection() {
+        self.socket.disconnect()
+    }
 }
 
 extension loginViewController:UITextFieldDelegate

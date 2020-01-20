@@ -21,4 +21,10 @@ struct LoginResponse:Codable
     let phone: String?
 }
 
+//struct Location:Codable
+//{
+//    var latitude : String?
+//    var longitude : String?
+//}
+
 
