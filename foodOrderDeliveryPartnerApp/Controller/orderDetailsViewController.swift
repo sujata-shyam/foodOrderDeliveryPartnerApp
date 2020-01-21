@@ -8,7 +8,7 @@
 
 import UIKit
 import SocketIO
-//import CoreLocation
+import CoreLocation
 
 class orderDetailsViewController: UIViewController
 {
@@ -24,6 +24,10 @@ class orderDetailsViewController: UIViewController
     {
         super.viewDidLoad()
         self.socket = self.manager.defaultSocket
+   
+        print(locationManager.location?.coordinate.latitude as Any)
+        print(locationManager.location?.coordinate.longitude as Any)
+
         setSocketEvents()
     }
     
@@ -34,7 +38,23 @@ class orderDetailsViewController: UIViewController
         self.socket.on(clientEvent: .connect) { (data, ack) in
             print(data)
             print("Socket connected")
+            
             self.socket.emit("active delivery partner", (defaults.string(forKey: "userId")!))
+        
+            
+//            let dpLocation = [
+//                "location" : [
+//                    "latitude": locationManager.location?.coordinate.latitude,
+//                    "longitude": locationManager.location?.coordinate.longitude,
+//                ]
+//            ]
+//
+//            self.socket.emit("update location", dpLocation)
+            
+        }
+        
+        self.socket.on(clientEvent: .ping) { (_, _) in
+            print("PING")
             
             let dpLocation = [
                 "location" : [
@@ -42,20 +62,12 @@ class orderDetailsViewController: UIViewController
                     "longitude": locationManager.location?.coordinate.longitude,
                 ]
             ]
-            self.socket.emit("updateUserInfo", dpLocation)
-            
-            
-            //if let newLocation = self.location
-            //{
-            //self.socket.emit("update location", with: newLocation)
-            //self.socket.emit("update location", "newLocation")
-            //socket.emit("myEvent", CustomData(name: "Erik", age: 24))
-            //self.socket.emit("update location", newLocation)
-            //}
-            
-            
+            self.socket.emit("update location", dpLocation)
         }
-        
+        self.socket.on("order details") {data, ack in
+            
+            print(data)
+        }
         self.socket.on("new task") { data, ack in
             print(data)
             

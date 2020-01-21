@@ -18,7 +18,7 @@ class loginViewController: UIViewController
     
 //    let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true), .compress])
 //    var socket:SocketIOClient!
-    //let locationManager = CLLocationManager()
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad()
     {
