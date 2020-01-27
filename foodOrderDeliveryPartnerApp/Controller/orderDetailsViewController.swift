@@ -58,12 +58,13 @@ class orderDetailsViewController: UIViewController
             
             let dpLocation = [
                 "location" : [
-                    "latitude": locationManager.location?.coordinate.latitude,
-                    "longitude": locationManager.location?.coordinate.longitude,
+                    "latitude": String((locationManager.location?.coordinate.latitude)!),
+                    "longitude": String((locationManager.location?.coordinate.longitude)!)
                 ]
             ]
             self.socket.emit("update location", dpLocation)
         }
+        //below 2 not working
         self.socket.on("order details") {data, ack in
             
             print(data)

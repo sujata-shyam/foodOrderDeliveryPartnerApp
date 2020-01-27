@@ -16,7 +16,9 @@ class loginViewController: UIViewController
     @IBOutlet weak var txtPhone: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     
-//    let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true), .compress])
+    @IBOutlet weak var viewLogin: UIView!
+    
+    //    let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true), .compress])
 //    var socket:SocketIOClient!
     let locationManager = CLLocationManager()
     
@@ -25,6 +27,7 @@ class loginViewController: UIViewController
         super.viewDidLoad()
         
         setTitleLabelUI()
+        setViewLogin()
         setTextDelegate()
         
         locationManager.requestAlwaysAuthorization()
@@ -35,6 +38,16 @@ class loginViewController: UIViewController
     {
         lblTitle.layer.cornerRadius = 10
         lblTitle.layer.masksToBounds = true
+        lblTitle.layer.borderWidth = 2
+        lblTitle.layer.borderColor = #colorLiteral(red: 1, green: 0.8323456645, blue: 0.4732058644, alpha: 1)
+    }
+    
+    func setViewLogin()
+    {
+        viewLogin.layer.cornerRadius = 10
+        viewLogin.layer.masksToBounds = true
+        viewLogin.layer.borderWidth = 2
+        viewLogin.layer.borderColor = #colorLiteral(red: 1, green: 0.8323456645, blue: 0.4732058644, alpha: 1)
     }
     
 //    func getCurrentLocation()
@@ -183,49 +196,6 @@ class loginViewController: UIViewController
         
         present(alertController, animated: true, completion: nil)
     }
-    
-   
-    
-    
-//    //MARK:- Socket functions
-//    
-//    private func setSocketEvents(_ deliveryPersonId:String)
-//    {
-//        self.socket.on(clientEvent: .connect) { (data, ack) in
-//            print(data)
-//            print("Socket connected")
-//            self.socket.emit("active delivery partner", deliveryPersonId)
-//            
-//            let dpLocation = [
-//                "location" : [
-//                    "latitude": self.locationManager.location?.coordinate.latitude,
-//                    "longitude": self.locationManager.location?.coordinate.longitude,
-//                ]
-//            ]
-//            self.socket.emit("updateUserInfo", dpLocation)
-//            
-//
-//            //if let newLocation = self.location
-//            //{
-//                //self.socket.emit("update location", with: newLocation)
-//                //self.socket.emit("update location", "newLocation")
-//                //socket.emit("myEvent", CustomData(name: "Erik", age: 24))
-//                //self.socket.emit("update location", newLocation)
-//            //}
-//            
-//            
-//        }
-//        
-//        self.socket.on("new task") { data, ack in
-//            print(data)
-//        }
-//    
-//        self.socket.connect()
-//    }
-//    
-//    private func closeSocketConnection() {
-//        self.socket.disconnect()
-//    }
 }
 
 extension loginViewController:UITextFieldDelegate

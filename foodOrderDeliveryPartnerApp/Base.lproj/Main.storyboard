@@ -114,11 +114,6 @@
                                     <constraint firstAttribute="trailing" secondItem="7E9-ON-wVZ" secondAttribute="trailing" constant="10" id="wnD-bq-Lb4"/>
                                     <constraint firstAttribute="trailing" secondItem="aiv-5v-RRJ" secondAttribute="trailing" constant="10" id="yFb-8u-YIH"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGW-XF-2Yh" userLabel="btnLogout">
                                 <rect key="frame" x="166" y="812" width="82" height="30"/>
@@ -159,6 +154,7 @@
                         <outlet property="lblTitle" destination="PRs-Mm-nPc" id="uKx-T9-Ia2"/>
                         <outlet property="txtPassword" destination="Zym-UW-2xT" id="NiQ-fb-d39"/>
                         <outlet property="txtPhone" destination="aiv-5v-RRJ" id="WPb-bG-seN"/>
+                        <outlet property="viewLogin" destination="WpR-33-MQk" id="hSz-mW-lJL"/>
                         <segue destination="UEj-5Y-xRc" kind="show" identifier="goToOrderDetails" id="xss-z3-qdS"/>
                     </connections>
                 </viewController>
@@ -242,7 +238,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background" width="305" height="433"/>
+        <image name="background" width="333" height="360"/>
         <namedColor name="Fire Brick">
             <color red="0.73725490196078436" green="0.19215686274509805" blue="0.082352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
