@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import SocketIO
 import CoreLocation
 
 class loginViewController: UIViewController
@@ -18,9 +17,7 @@ class loginViewController: UIViewController
     
     @IBOutlet weak var viewLogin: UIView!
     
-    //    let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true), .compress])
-//    var socket:SocketIOClient!
-    let locationManager = CLLocationManager()
+    //let locationManager = CLLocationManager()
     
     override func viewDidLoad()
     {
@@ -30,8 +27,11 @@ class loginViewController: UIViewController
         setViewLogin()
         setTextDelegate()
         
-        locationManager.requestAlwaysAuthorization()
-        //getCurrentLocation()
+//        locationManager.delegate = self
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.requestAlwaysAuthorization()
+        
+        LocationManager.shared.start()
     }
 
     func setTitleLabelUI()
@@ -49,18 +49,6 @@ class loginViewController: UIViewController
         viewLogin.layer.borderWidth = 2
         viewLogin.layer.borderColor = #colorLiteral(red: 1, green: 0.8323456645, blue: 0.4732058644, alpha: 1)
     }
-    
-//    func getCurrentLocation()
-//    {
-//
-//        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-//            CLLocationManager.authorizationStatus() == .authorizedAlways)
-//        {
-//
-//            print(locationManager.location?.coordinate.latitude)
-//            print(locationManager.location?.coordinate.longitude)
-//        }
-//    }
     
     func setTextDelegate()
     {
@@ -124,22 +112,25 @@ class loginViewController: UIViewController
 
                 if loginResponse.id != nil
                 {
-//                    self.socket = self.manager.defaultSocket
-                    
                     if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
                         CLLocationManager.authorizationStatus() == .authorizedAlways)
                     {
-                        //self.setSocketEvents(loginResponse.id!)
-                        //self.closeSocketConnection()
-                        
                         self.saveUserDetailsLocally(loginResponse)
-                        
+                   
+                        if(SocketIOManager.sharedInstance.socket.status == .connected)
+                        {
+                           //LocationManager.shared.request()
+                       SocketIOManager.sharedInstance.emitActiveDeliveryPartner(loginResponse.id!)
+                        }
+                        else
+                        {
+                            SocketIOManager.sharedInstance.establishConnection()
+                         SocketIOManager.sharedInstance.emitActiveDeliveryPartner(loginResponse.id!)
+                        }
+                    
                         DispatchQueue.main.async
                         {
-                            //displayAlert(vc: self, title: "", message: "Login Successful")
-                           
                             self.clearUIFields()
-                            
                             self.performSegue(withIdentifier: "goToOrderDetails", sender: self)
                         }
                     }
@@ -147,9 +138,9 @@ class loginViewController: UIViewController
                     {
                         DispatchQueue.main.async
                         {
-                            self.displayAlertForSettings()
+                            displayAlertForSettings()
                         }
-                    }                    
+                    }
                 }
                 else
                 {
@@ -174,28 +165,6 @@ class loginViewController: UIViewController
         defaults.set(loginResponse.phone, forKey: "userPhone")
         defaults.set(true, forKey: "isUserLoggedIn")
     }
-    
-    func displayAlertForSettings()
-    {
-        let alertController = UIAlertController (title: "The app needs access to your location to function.", message: "Go to Settings?", preferredStyle: .alert)
-        
-        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                return
-            }
-            
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                    print("Settings opened: \(success)") // Prints true
-                })
-            }
-        }
-        alertController.addAction(settingsAction)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
 }
 
 extension loginViewController:UITextFieldDelegate
@@ -206,3 +175,80 @@ extension loginViewController:UITextFieldDelegate
         return true
     }
 }
+
+//extension loginViewController:CLLocationManagerDelegate
+//{
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
+//    {
+//        retrieveCurrentLocation()
+//    }
+//
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+//    {
+//        if let location = locations.last
+//        {
+//            SocketIOManager.sharedInstance.onLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude: "\(location.coordinate.longitude)")
+//        }
+//    }
+//
+//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+//    {
+//        if let clErr = error as? CLError
+//        {
+//            switch clErr
+//            {
+//            case CLError.locationUnknown:
+//                print("Error Location Unknown")
+//            case CLError.denied:
+//                displayAlertForSettings()
+//            default:
+//                print("other Core Location error")
+//            }
+//        }
+//        else
+//        {
+//            print("other error:", error.localizedDescription)
+//        }
+//    }
+//
+//    func retrieveCurrentLocation()
+//    {
+//        let status = CLLocationManager.authorizationStatus()
+//
+//        if(status == .denied || status == .restricted || !CLLocationManager.locationServicesEnabled())
+//        {
+//            displayAlertForSettings()
+//            return
+//        }
+//
+//        if(status == .notDetermined)
+//        {
+//            locationManager.requestAlwaysAuthorization()
+//            return
+//        }
+//
+//        locationManager.startUpdatingLocation()
+//    }
+//
+//    func displayAlertForSettings()
+//    {
+//        let alertController = UIAlertController (title: "The app needs access to your location to function.", message: "Go to Settings?", preferredStyle: .alert)
+//
+//        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+//            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+//                return
+//            }
+//
+//            if UIApplication.shared.canOpenURL(settingsUrl) {
+//                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+//                    print("Settings opened: \(success)") // Prints true
+//                })
+//            }
+//        }
+//        alertController.addAction(settingsAction)
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+//        alertController.addAction(cancelAction)
+//
+//        present(alertController, animated: true, completion: nil)
+//    }
+//}

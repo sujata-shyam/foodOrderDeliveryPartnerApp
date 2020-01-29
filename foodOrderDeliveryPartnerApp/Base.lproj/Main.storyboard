@@ -180,26 +180,68 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAK-1s-eXW" userLabel="btnAcceptOrder">
-                                <rect key="frame" x="20" y="792" width="374" height="40"/>
-                                <color key="backgroundColor" name="Tan"/>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="OJU-bL-mPT" userLabel="StackViewButtons">
+                                <rect key="frame" x="10" y="254" width="394" height="358.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAK-1s-eXW" userLabel="btnAcceptOrder">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="109.5"/>
+                                        <color key="backgroundColor" name="Tan"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Accept Order">
+                                            <color key="titleColor" name="Fire Brick"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="btnAcceptOrderTapped:" destination="UEj-5Y-xRc" eventType="touchUpInside" id="wLn-cs-P5e"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Djy-Fa-Atw" userLabel="btnOrderPicked">
+                                        <rect key="frame" x="0.0" y="124.5" width="394" height="109.5"/>
+                                        <color key="backgroundColor" name="Tan"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Order Picked-Up">
+                                            <color key="titleColor" name="Fire Brick"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="btnOrderPickedUpTapped:" destination="UEj-5Y-xRc" eventType="touchUpInside" id="ISI-fI-Gzj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K8l-DC-DcS" userLabel="btnOrderDelivered">
+                                        <rect key="frame" x="0.0" y="249" width="394" height="109.5"/>
+                                        <color key="backgroundColor" name="Tan"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Order Delivered">
+                                            <color key="titleColor" name="Fire Brick"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="btnOrderDeliveredTapped:" destination="UEj-5Y-xRc" eventType="touchUpInside" id="X2c-Bs-FfV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Great Job 👍🏼" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QH-68-4ac" userLabel="lblSuccess">
+                                <rect key="frame" x="10" y="428" width="394" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Dx6-aG-W4D"/>
-                                    <constraint firstAttribute="height" constant="40" id="Ndm-fs-EGK"/>
+                                    <constraint firstAttribute="height" constant="40" id="Ees-Mv-8VR"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Accept Order">
-                                    <color key="titleColor" name="Fire Brick"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="btnAcceptOrderTapped:" destination="UEj-5Y-xRc" eventType="touchUpInside" id="wLn-cs-P5e"/>
-                                </connections>
-                            </button>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" name="Fire Brick"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzp-Jc-5m8" userLabel="btnLogout">
                                 <rect key="frame" x="344" y="49" width="55" height="30"/>
                                 <constraints>
@@ -214,21 +256,29 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="BJz-LZ-JuL" firstAttribute="bottom" secondItem="gAK-1s-eXW" secondAttribute="bottom" constant="30" id="6ow-U9-Ccs"/>
+                            <constraint firstAttribute="trailing" secondItem="OJU-bL-mPT" secondAttribute="trailing" constant="10" id="0Y8-FB-Byi"/>
+                            <constraint firstItem="OJU-bL-mPT" firstAttribute="leading" secondItem="AZK-Hf-mw0" secondAttribute="leading" constant="10" id="6fi-B6-2NG"/>
                             <constraint firstItem="rPd-9q-XvQ" firstAttribute="top" secondItem="BJz-LZ-JuL" secondAttribute="top" constant="150" id="8bN-QY-7Lz"/>
                             <constraint firstItem="BJz-LZ-JuL" firstAttribute="trailing" secondItem="gzp-Jc-5m8" secondAttribute="trailing" constant="15" id="Aey-bK-26h"/>
-                            <constraint firstItem="gAK-1s-eXW" firstAttribute="leading" secondItem="BJz-LZ-JuL" secondAttribute="leading" constant="20" id="CW0-ip-okf"/>
                             <constraint firstItem="gzp-Jc-5m8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BJz-LZ-JuL" secondAttribute="leading" symbolic="YES" id="QYp-Ah-z7W"/>
                             <constraint firstItem="rPd-9q-XvQ" firstAttribute="leading" secondItem="BJz-LZ-JuL" secondAttribute="leading" constant="10" id="Qh8-7e-Fbx"/>
+                            <constraint firstItem="1QH-68-4ac" firstAttribute="leading" secondItem="BJz-LZ-JuL" secondAttribute="leading" constant="10" id="RUh-4o-SUl"/>
                             <constraint firstItem="BJz-LZ-JuL" firstAttribute="trailing" secondItem="rPd-9q-XvQ" secondAttribute="trailing" constant="10" id="VNP-NZ-YbK"/>
+                            <constraint firstItem="1QH-68-4ac" firstAttribute="centerY" secondItem="AZK-Hf-mw0" secondAttribute="centerY" id="WZB-de-S7O"/>
+                            <constraint firstItem="OJU-bL-mPT" firstAttribute="height" secondItem="AZK-Hf-mw0" secondAttribute="height" multiplier="0.4" id="ZXb-ug-2fe"/>
+                            <constraint firstItem="BJz-LZ-JuL" firstAttribute="trailing" secondItem="1QH-68-4ac" secondAttribute="trailing" constant="10" id="aDG-Sd-FU2"/>
                             <constraint firstItem="gzp-Jc-5m8" firstAttribute="top" secondItem="BJz-LZ-JuL" secondAttribute="top" constant="5" id="aRU-P4-0hQ"/>
-                            <constraint firstItem="BJz-LZ-JuL" firstAttribute="trailing" secondItem="gAK-1s-eXW" secondAttribute="trailing" constant="20" id="cdM-CO-BYV"/>
+                            <constraint firstItem="OJU-bL-mPT" firstAttribute="top" secondItem="rPd-9q-XvQ" secondAttribute="bottom" constant="10" id="dDc-UB-TEv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BJz-LZ-JuL"/>
                     </view>
                     <connections>
+                        <outlet property="StackViewButtons" destination="OJU-bL-mPT" id="dCm-zQ-ddi"/>
                         <outlet property="btnAcceptOrder" destination="gAK-1s-eXW" id="fay-FR-Orf"/>
+                        <outlet property="btnOrderDelivered" destination="K8l-DC-DcS" id="JEj-NS-QkR"/>
+                        <outlet property="btnOrderPicked" destination="Djy-Fa-Atw" id="UJO-kw-3uQ"/>
                         <outlet property="lblNoOrder" destination="rPd-9q-XvQ" id="SaM-eN-mVU"/>
+                        <outlet property="lblSuccess" destination="1QH-68-4ac" id="tBq-FJ-uxY"/>
                         <segue destination="RCZ-Q1-iPj" kind="unwind" identifier="unwindToLogin" unwindAction="unwindTologinVCWithSegue:" id="20U-hS-Hr4"/>
                     </connections>
                 </viewController>

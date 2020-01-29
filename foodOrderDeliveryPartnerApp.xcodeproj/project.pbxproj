@@ -17,6 +17,8 @@
 		851BC24D23D5B7A6004B1E18 /* orderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851BC24C23D5B7A6004B1E18 /* orderDetailsViewController.swift */; };
 		85A1A04823CF2EA8008F961C /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A1A04723CF2EA8008F961C /* GlobalFunctions.swift */; };
 		85A1A04B23CF2F2A008F961C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A1A04A23CF2F2A008F961C /* User.swift */; };
+		85A3EB9E23DEE9FE006DE090 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A3EB9D23DEE9FE006DE090 /* SocketIOManager.swift */; };
+		85A3EBA023E02D43006DE090 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A3EB9F23E02D43006DE090 /* LocationManager.swift */; };
 		B307ECBA30B16C1DB34CFEB6 /* Pods_foodOrderDeliveryPartnerApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A5F2607CC9CD56A6481381 /* Pods_foodOrderDeliveryPartnerApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +36,8 @@
 		851BC24C23D5B7A6004B1E18 /* orderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orderDetailsViewController.swift; sourceTree = "<group>"; };
 		85A1A04723CF2EA8008F961C /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		85A1A04A23CF2F2A008F961C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		85A3EB9D23DEE9FE006DE090 /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
+		85A3EB9F23E02D43006DE090 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A5A5F2607CC9CD56A6481381 /* Pods_foodOrderDeliveryPartnerApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_foodOrderDeliveryPartnerApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A94AF251CB1544CA682D2E47 /* Pods-foodOrderDeliveryPartnerApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodOrderDeliveryPartnerApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-foodOrderDeliveryPartnerApp/Pods-foodOrderDeliveryPartnerApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +93,8 @@
 				850F032E23CDDB8A0057F9C4 /* Colour.xcassets */,
 				850F032523CDD77E0057F9C4 /* LaunchScreen.storyboard */,
 				850F032823CDD77E0057F9C4 /* Info.plist */,
+				85A3EB9D23DEE9FE006DE090 /* SocketIOManager.swift */,
+				85A3EB9F23E02D43006DE090 /* LocationManager.swift */,
 			);
 			path = foodOrderDeliveryPartnerApp;
 			sourceTree = "<group>";
@@ -245,6 +251,8 @@
 				851BC24B23D58F98004B1E18 /* Order.swift in Sources */,
 				850F031F23CDD7780057F9C4 /* loginViewController.swift in Sources */,
 				850F031D23CDD7780057F9C4 /* AppDelegate.swift in Sources */,
+				85A3EB9E23DEE9FE006DE090 /* SocketIOManager.swift in Sources */,
+				85A3EBA023E02D43006DE090 /* LocationManager.swift in Sources */,
 				85A1A04823CF2EA8008F961C /* GlobalFunctions.swift in Sources */,
 				851BC24D23D5B7A6004B1E18 /* orderDetailsViewController.swift in Sources */,
 				85A1A04B23CF2F2A008F961C /* User.swift in Sources */,
