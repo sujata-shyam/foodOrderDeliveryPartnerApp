@@ -17,24 +17,41 @@ class LocationManager: NSObject, CLLocationManagerDelegate
     
     override init()
     {
+//        if (CLLocationManager.locationServicesEnabled())
+//        {
+        
         locationManager = CLLocationManager()
+        
+        //added on 29th Jan
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 20.0 // 20.0 meters
+        //added on 29th Jan
+
         super.init()
         locationManager.delegate = self
+//        }
+//        else
+//        {
+//            #if debug
+//            println("Location services are not enabled");
+//            #endif
+//        }
+        
+        
+        
     }
     
     func start()
     {
         locationManager.requestAlwaysAuthorization()
-        //locationManager.requestLocation()
-        //locationManager.startUpdatingLocation()
-        //locationManager.pausesLocationUpdatesAutomatically = true
     }
     
-    func request()
-    {
-        locationManager.requestLocation()
-    }
+//    func request()
+//    {
+//        locationManager.requestLocation()
+//    }
     
     func stop()
     {
@@ -80,7 +97,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate
         {
             print("other error:", error.localizedDescription)
         }
-        //locationManager.stopUpdatingLocation()
+        locationManager.stopUpdatingLocation()
     }
     
     func retrieveCurrentLocation()

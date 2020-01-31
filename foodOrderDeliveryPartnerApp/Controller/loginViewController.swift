@@ -31,6 +31,8 @@ class loginViewController: UIViewController
 //        locationManager.desiredAccuracy = kCLLocationAccuracyBest
 //        locationManager.requestAlwaysAuthorization()
         
+       
+        
         LocationManager.shared.start()
     }
 
