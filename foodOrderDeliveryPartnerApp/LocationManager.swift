@@ -24,9 +24,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate
         
         //added on 29th Jan
         locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 20.0 // 20.0 meters
+        locationManager.distanceFilter = 5.0 // 20.0 meters
         //added on 29th Jan
 
         super.init()
@@ -65,16 +65,21 @@ class LocationManager: NSObject, CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
+        
+        //locationManager.stopUpdatingLocation()
+
         //if let location = locations.last //For startUpdatingLocation()
         if let location = locations.first //For requestlocation()
         {
-            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude: "\(location.coordinate.longitude)")
-        
+//            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude: "\(location.coordinate.longitude)")
+
+            
+            //For Testing
             //Spice Kitchen(GeekSkool)
-//            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
+            //SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
 //
             //Sway (Kalyan Nagar)
-//            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "13.020890300000001",, dpLongitude: "77.643156")
+            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "13.020890300000001",dpLongitude: "77.643156")
             
         }
     }

@@ -118,17 +118,17 @@ class loginViewController: UIViewController
                         CLLocationManager.authorizationStatus() == .authorizedAlways)
                     {
                         self.saveUserDetailsLocally(loginResponse)
-                   
-                        if(SocketIOManager.sharedInstance.socket.status == .connected)
-                        {
-                           //LocationManager.shared.request()
-                       SocketIOManager.sharedInstance.emitActiveDeliveryPartner(loginResponse.id!)
-                        }
-                        else
-                        {
-                            SocketIOManager.sharedInstance.establishConnection()
-                         SocketIOManager.sharedInstance.emitActiveDeliveryPartner(loginResponse.id!)
-                        }
+                        SocketIOManager.sharedInstance.establishConnection()
+
+//                        if(SocketIOManager.sharedInstance.socket.status == .connected)
+//                        {
+//                       SocketIOManager.sharedInstance.emitActiveDeliveryPartner(loginResponse.id!)
+//                        }
+//                        else
+//                        {
+//                            SocketIOManager.sharedInstance.establishConnection()
+//                         SocketIOManager.sharedInstance.emitActiveDeliveryPartner(loginResponse.id!)
+//                        }
                     
                         DispatchQueue.main.async
                         {

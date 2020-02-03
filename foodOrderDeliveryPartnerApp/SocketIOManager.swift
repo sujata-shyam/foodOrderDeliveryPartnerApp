@@ -25,7 +25,27 @@ class SocketIOManager: NSObject
             print(data)
             print("Socket connected")
             
+            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "13.020890300000001",dpLongitude: "77.643156")
+            
+            //print(defaults.string(forKey: "userId")!)
+            //LocationManager.shared.retrieveCurrentLocation()
+
+            //SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
+            
+            SocketIOManager.sharedInstance.emitActiveDeliveryPartner(defaults.string(forKey: "userId")!)
+            
             //self.socket.emit("active delivery partner", (defaults.string(forKey: "userId")!))
+            
+//            _ = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { timer in
+//
+//                //For Testing
+//                //Spice Kitchen(GeekSkool)
+//                print("TIMER")
+//                SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
+//            }
+            
+//            LocationManager.shared.retrieveCurrentLocation()
+            self.onNewTask()
         }
         socket.connect()
     }
@@ -41,12 +61,7 @@ class SocketIOManager: NSObject
     
     func emitActiveDeliveryPartner(_ userId:String)
     {
-        //self.socket.emit("active delivery partner", (defaults.string(forKey: "userId")!))
-//        socket?.emitWithAck("active delivery partner", userId).timingOut(after: 0) {data in
-//            print(data)
-//        }
         self.socket.emit("active delivery partner", userId)
-
     }
     
     func emitLocationUpdate(dpLatitude: String, dpLongitude: String)
@@ -67,8 +82,8 @@ class SocketIOManager: NSObject
 //                    "longitude": dpLongitude
 //                ]
 //            ]
-                        //self.socket.emit("update location", dpLocation)
- //                   }
+//                        self.socket.emit("update location", dpLocation)
+//                    }
         
         
         let dpLocation = [
@@ -86,7 +101,6 @@ class SocketIOManager: NSObject
 
         self.socket.on("new task") { data, ack in
         print(data)
-            
         do
         {
             let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)

@@ -31,7 +31,7 @@ class orderDetailsViewController: UIViewController
 //        print(locationManager.location?.coordinate.latitude as Any)
 //        print(locationManager.location?.coordinate.longitude as Any)
 
-        setSocketEvents()
+        //setSocketEvents()
     }
     
     //MARK:- Socket functions

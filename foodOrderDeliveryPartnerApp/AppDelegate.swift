@@ -20,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 
     func applicationDidBecomeActive(_ application: UIApplication)
     {
-        SocketIOManager.sharedInstance.establishConnection()
+        //SocketIOManager.sharedInstance.establishConnection()
+        //SocketIOManager.sharedInstance.socket.connect()
     }
 
     func applicationWillTerminate(_ application: UIApplication)
