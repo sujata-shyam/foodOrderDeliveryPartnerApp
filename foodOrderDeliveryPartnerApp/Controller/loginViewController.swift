@@ -17,7 +17,7 @@ class loginViewController: UIViewController
     
     @IBOutlet weak var viewLogin: UIView!
     
-    //let locationManager = CLLocationManager()
+    
     
     override func viewDidLoad()
     {
@@ -27,13 +27,7 @@ class loginViewController: UIViewController
         setViewLogin()
         setTextDelegate()
         
-//        locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.requestAlwaysAuthorization()
-        
-       
-        
-        LocationManager.shared.start()
+        //LocationManager.shared.start() //Commented on 4th Feb
     }
 
     func setTitleLabelUI()
@@ -118,17 +112,50 @@ class loginViewController: UIViewController
                         CLLocationManager.authorizationStatus() == .authorizedAlways)
                     {
                         self.saveUserDetailsLocally(loginResponse)
-                        SocketIOManager.sharedInstance.establishConnection()
+                        //SocketIOManager.sharedInstance.establishConnection()
 
-//                        if(SocketIOManager.sharedInstance.socket.status == .connected)
-//                        {
-//                       SocketIOManager.sharedInstance.emitActiveDeliveryPartner(loginResponse.id!)
-//                        }
-//                        else
-//                        {
-//                            SocketIOManager.sharedInstance.establishConnection()
-//                         SocketIOManager.sharedInstance.emitActiveDeliveryPartner(loginResponse.id!)
-//                        }
+                        if(SocketIOManager.sharedInstance.socket.status == .connected)
+                        {
+                       SocketIOManager.sharedInstance.emitActiveDeliveryPartner(loginResponse.id!)
+                            
+                            if let initialLat = defaults.string(forKey: "initialLatitude"), let initialLong = defaults.string(forKey: "initialLongitude")
+                            {
+                                
+                                print("YES, YES, YES, GOT THE LAT. AND LONG.")
+                                
+                                //SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
+                                
+                                /////////////////////////////////
+                                //for spice curry
+                                SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
+                                
+                                
+                            DispatchQueue.main.async
+                            {
+                                    
+                                
+                                Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { timer in
+                                    
+                                    print("TIMER")
+                                    SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
+                                    
+                                    //SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
+                                }
+                            }
+                                //////////////////////////////
+                                
+                                
+                                SocketIOManager.sharedInstance.onNewTask()
+                            }
+                            
+                        }
+                        else
+                        {
+                            //SocketIOManager.sharedInstance.establishConnection()
+                            //SocketIOManager.sharedInstance.emitActiveDeliveryPartner(loginResponse.id!)
+                            
+                            print("SOCKET STILL NOT CONNECTED")
+                        }
                     
                         DispatchQueue.main.async
                         {

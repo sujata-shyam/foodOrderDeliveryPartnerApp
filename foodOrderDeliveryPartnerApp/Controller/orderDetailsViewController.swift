@@ -184,10 +184,21 @@ class orderDetailsViewController: UIViewController
     
     func clearUserDefaults()
     {
+        //Below: Commented on 4th Feb
+        /*
         defaults.set(false, forKey: "isUserLoggedIn")
         defaults.set(nil, forKey: "userMessage")
         defaults.set(nil, forKey: "userSession")
         defaults.set(nil, forKey: "userId")
         defaults.set(nil, forKey: "userPhone")
+        */
+        //Above: Commented on 4th Feb
+        
+        //Below: Added on 4th Feb
+        if let bundleID = Bundle.main.bundleIdentifier
+        {
+            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+        }
+        //Above: Added on 4th Feb
     }
 }

@@ -83,26 +83,6 @@ class SocketIOManager: NSObject
     
     func emitLocationUpdate(dpLatitude: String, dpLongitude: String)
     {
-//        self.socket.on(clientEvent: .ping) { (_, _) in
-//                        print("PING")
-//
-////                        let dpLocation = [
-////                            "location" : [
-////                                "latitude": String((locationManager.location?.coordinate.latitude)!),
-////                                "longitude": String((locationManager.location?.coordinate.longitude)!)
-////                            ]
-////                        ]
-//
-//            let dpLocation = [
-//                "location" : [
-//                    "latitude": dpLatitude,
-//                    "longitude": dpLongitude
-//                ]
-//            ]
-//                        self.socket.emit("update location", dpLocation)
-//                    }
-        
-        
         let dpLocation = [
             "location" : [
                 "latitude": dpLatitude,
@@ -112,6 +92,37 @@ class SocketIOManager: NSObject
         self.socket.emit("update location", dpLocation)
     }
     
+//    func emitLocationUpdate(dpLatitude: String, dpLongitude: String)
+//    {
+////        self.socket.on(clientEvent: .ping) { (_, _) in
+////                        print("PING")
+////
+//////                        let dpLocation = [
+//////                            "location" : [
+//////                                "latitude": String((locationManager.location?.coordinate.latitude)!),
+//////                                "longitude": String((locationManager.location?.coordinate.longitude)!)
+//////                            ]
+//////                        ]
+////
+////            let dpLocation = [
+////                "location" : [
+////                    "latitude": dpLatitude,
+////                    "longitude": dpLongitude
+////                ]
+////            ]
+////                        self.socket.emit("update location", dpLocation)
+////                    }
+//
+//
+//        let dpLocation = [
+//            "location" : [
+//                "latitude": dpLatitude,
+//                "longitude": dpLongitude
+//            ]
+//        ]
+//        self.socket.emit("update location", dpLocation)
+//    }
+    
     func onNewTask()->String?
     {
         var localOrderId:String?
@@ -120,6 +131,7 @@ class SocketIOManager: NSObject
         print(data)
         do
         {
+            print("Received New Task")
             let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
             let orderDetail = try JSONDecoder().decode([OrderDetail].self, from: jsonData)
             print(orderDetail)

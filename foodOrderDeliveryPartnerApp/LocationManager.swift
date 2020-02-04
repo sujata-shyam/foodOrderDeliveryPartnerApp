@@ -17,39 +17,21 @@ class LocationManager: NSObject, CLLocationManagerDelegate
     
     override init()
     {
-//        if (CLLocationManager.locationServicesEnabled())
-//        {
-        
         locationManager = CLLocationManager()
         
-        //added on 29th Jan
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.pausesLocationUpdatesAutomatically = true
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 5.0 // 20.0 meters
-        //added on 29th Jan
-
         super.init()
-        locationManager.delegate = self
-//        }
-//        else
-//        {
-//            #if debug
-//            println("Location services are not enabled");
-//            #endif
-//        }
-                
+        
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.distanceFilter = 5.0 // 20.0 meters
+        locationManager.delegate = self //Calls didChangeAuthorization
     }
     
     func start()
     {
         locationManager.requestAlwaysAuthorization()
     }
-    
-//    func request()
-//    {
-//        locationManager.requestLocation()
-//    }
     
     func stop()
     {
@@ -67,11 +49,25 @@ class LocationManager: NSObject, CLLocationManagerDelegate
         //locationManager.stopUpdatingLocation()
 
         //if let location = locations.last //For startUpdatingLocation()
+        
+        
         if let location = locations.first //For requestlocation()
         {
-            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude: "\(location.coordinate.longitude)")
-
+            //Below: Added on 4th Feb
+            defaults.set("\(location.coordinate.latitude)", forKey: "initialLatitude")
+            defaults.set("\(location.coordinate.longitude)", forKey: "initialLongitude")
             
+            print("initialLatitude: \(location.coordinate.latitude)")
+            print("initialLongitude: \(location.coordinate.longitude)")
+
+            //Above: Added on 4th Feb
+            
+            //Below: Commented on 4th Feb
+            /*  SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude: "\(location.coordinate.longitude)")
+
+             */
+            //Above: Commented on 4th Feb
+
             //For Testing
             //Spice Kitchen(GeekSkool)
             //SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
@@ -88,17 +84,17 @@ class LocationManager: NSObject, CLLocationManagerDelegate
         {
             switch clErr
             {
-            case CLError.locationUnknown:
-                print("Error Location Unknown")
-            case CLError.denied:
-                displayAlertForSettings()
-            default:
-                print("other Core Location error")
+                case CLError.locationUnknown:
+                    print("Error Location Unknown")
+                case CLError.denied:
+                    displayAlertForSettings()
+                default:
+                    print("Core Location error:\(clErr.localizedDescription)")
             }
         }
         else
         {
-            print("other error:", error.localizedDescription)
+            print("Error: ", error.localizedDescription)
         }
         locationManager.stopUpdatingLocation()
     }
@@ -119,7 +115,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate
             return
         }
         
-        locationManager.startUpdatingLocation()
+        //locationManager.startUpdatingLocation() //Commented on 4th Feb
+        locationManager.requestLocation()
     }
     
 }
