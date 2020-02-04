@@ -4,10 +4,7 @@ import SocketIO
 class SocketIOManager: NSObject
 {
     static let sharedInstance = SocketIOManager()
-
     var socket:SocketIOClient!
-
-    // defaultNamespaceSocket and swiftSocket both share a single connection to the server
     let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true), .compress])
 
     override init()
@@ -16,49 +13,69 @@ class SocketIOManager: NSObject
         socket = manager.defaultSocket
     }
     
-    
-    
-    // MARK: Socket connection open
+    //Function to establish the socket connection with your server. Generally you want to call this method from your `Appdelegate` in the `applicationDidBecomeActive` method.
     func establishConnection()
     {
-        self.socket.on(clientEvent: .connect) { (data, ack) in
-            print(data)
-            print("Socket connected")
-            
-            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "13.020890300000001",dpLongitude: "77.643156")
-            
-            //print(defaults.string(forKey: "userId")!)
-            //LocationManager.shared.retrieveCurrentLocation()
-
-            //SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
-            
-            SocketIOManager.sharedInstance.emitActiveDeliveryPartner(defaults.string(forKey: "userId")!)
-            
-            //self.socket.emit("active delivery partner", (defaults.string(forKey: "userId")!))
-            
-//            _ = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { timer in
-//
-//                //For Testing
-//                //Spice Kitchen(GeekSkool)
-//                print("TIMER")
-//                SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
-//            }
-            
-//            LocationManager.shared.retrieveCurrentLocation()
-            self.onNewTask()
-        }
         socket.connect()
+        print("Socket Connected!")
     }
-    
-    // MARK: Socket connection close
+   
+    //Function to close established socket connection. Call this method from `applicationDidEnterBackground` in your `Appdelegate` method.
     func closeConnection()
     {
-        socket.on("disconnect") {data, ack in
-            print("socket disconnected")
-        }
         socket.disconnect()
+        print("Socket Disconnected!")
     }
     
+//    func establishConnection()
+//    {
+//        self.socket.on(clientEvent: .connect) { (data, ack) in
+//            print(data)
+//            print("Socket connected")
+//
+//
+//            SocketIOManager.sharedInstance.emitActiveDeliveryPartner(defaults.string(forKey: "userId")!)
+//
+////            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude:
+////            "\(LocationManager.shared.locationManager.location?.coordinate.latitude)", dpLongitude: "\(LocationManager.shared.locationManager.location?.coordinate.longitude)")
+//
+//
+//
+//
+////            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "13.020890300000001",dpLongitude: "77.643156")
+////
+//            //print(defaults.string(forKey: "userId")!)
+//            //LocationManager.shared.retrieveCurrentLocation()
+//
+//            //for spice curry
+//            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
+//
+//
+//
+//            //self.socket.emit("active delivery partner", (defaults.string(forKey: "userId")!))
+//
+////            _ = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { timer in
+////
+////                //For Testing
+////                //Spice Kitchen(GeekSkool)
+////                print("TIMER")
+////                SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
+////            }
+//
+////            LocationManager.shared.retrieveCurrentLocation()
+//            self.onNewTask()
+//        }
+//        socket.connect()
+//    }
+    
+    //    func closeConnection()
+    //    {
+    //        socket.on("disconnect") {data, ack in
+    //            print("socket disconnected")
+    //        }
+    //        socket.disconnect()
+    //    }
+
     func emitActiveDeliveryPartner(_ userId:String)
     {
         self.socket.emit("active delivery partner", userId)

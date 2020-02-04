@@ -38,9 +38,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate
 //            println("Location services are not enabled");
 //            #endif
 //        }
-        
-        
-        
+                
     }
     
     func start()
@@ -71,7 +69,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate
         //if let location = locations.last //For startUpdatingLocation()
         if let location = locations.first //For requestlocation()
         {
-//            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude: "\(location.coordinate.longitude)")
+            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude: "\(location.coordinate.longitude)")
 
             
             //For Testing
@@ -79,8 +77,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate
             //SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
 //
             //Sway (Kalyan Nagar)
-            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "13.020890300000001",dpLongitude: "77.643156")
-            
+//            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "13.020890300000001",dpLongitude: "77.643156")
+//
         }
     }
     
