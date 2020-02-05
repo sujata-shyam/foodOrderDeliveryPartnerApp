@@ -36,30 +36,30 @@ class orderDetailsViewController: UIViewController
     
     //MARK:- Socket functions
     
-    private func setSocketEvents()
-    {
-        if let orderID = SocketIOManager.sharedInstance.onNewTask()
-        {
-            self.orderId = orderID
-            
-            DispatchQueue.main.async
-            {
-                self.lblNoOrder.isHidden = true
-                self.StackViewButtons.isHidden = false
-                
-                self.btnOrderPicked.isEnabled = false
-                self.btnOrderDelivered.isEnabled = false
-            }
-        }
-        else
-        {
-            DispatchQueue.main.async
-            {
-                self.lblNoOrder.isHidden = false
-                self.StackViewButtons.isHidden = true
-            }
-        }
-    }
+//    private func setSocketEvents()
+//    {
+//        if let orderID = SocketIOManager.sharedInstance.onNewTask()
+//        {
+//            self.orderId = orderID
+//            
+//            DispatchQueue.main.async
+//            {
+//                self.lblNoOrder.isHidden = true
+//                self.StackViewButtons.isHidden = false
+//                
+//                self.btnOrderPicked.isEnabled = false
+//                self.btnOrderDelivered.isEnabled = false
+//            }
+//        }
+//        else
+//        {
+//            DispatchQueue.main.async
+//            {
+//                self.lblNoOrder.isHidden = false
+//                self.StackViewButtons.isHidden = true
+//            }
+//        }
+//    }
     
 //    private func setSocketEvents()
 //    {

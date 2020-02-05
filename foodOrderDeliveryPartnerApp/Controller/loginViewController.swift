@@ -17,8 +17,6 @@ class loginViewController: UIViewController
     
     @IBOutlet weak var viewLogin: UIView!
     
-    
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -127,17 +125,20 @@ class loginViewController: UIViewController
                                 
                                 /////////////////////////////////
                                 //for spice curry
-                                SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
+                            //SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
                                 
+                                //For Sway
+                                SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "13.020890300000001",dpLongitude: "77.643156")
                                 
                             DispatchQueue.main.async
                             {
-                                    
-                                
-                                Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { timer in
+                                Timer.scheduledTimer(withTimeInterval: 20, repeats: true) { timer in
                                     
                                     print("TIMER")
-                                    SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
+//                                    SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
+                                    
+                                   
+                                    SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "13.020890300000001",dpLongitude: "77.643156")
                                     
                                     //SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
                                 }
