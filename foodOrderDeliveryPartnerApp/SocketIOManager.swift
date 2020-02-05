@@ -5,7 +5,10 @@ class SocketIOManager: NSObject
 {
     static let sharedInstance = SocketIOManager()
     var socket:SocketIOClient!
-    let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true), .compress])
+    
+    //let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true), .compress])
+    //let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true),.forceWebsockets(true)])
+    let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true)])
 
     override init()
     {
@@ -16,13 +19,45 @@ class SocketIOManager: NSObject
     func establishConnection()
     {
         socket.connect()
-        print("Socket Connected!")
+//        socket.on(clientEvent: .connect) {data, ack in
+//            print("Socket Connected!")
+//
+//            self.socket.on("new task") { data, ack in
+//                print("new task:\(data)")
+//            }
+//        }
+        
+        socket.on(clientEvent: .connect) {data, ack in
+            print("Socket Connected!")
+            self.socket.on("new task") { data, ack in
+                print("new task:\(data)")
+                do
+                {
+                    print("Received New Task")
+                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                    let orderDetail = try JSONDecoder().decode([OrderDetail].self, from: jsonData)
+                    print(orderDetail)
+                    
+                    if let orderID = orderDetail.first?.orderId
+                    {
+                        print("orderID:\(orderID)")
+                        NotificationCenter.default.post(name: NSNotification.Name("gotOrderDetail"), object: orderDetail)
+                    }
+                }
+                catch
+                {
+                    print(error)
+                }
+            }
+        }
     }
    
     func closeConnection()
     {
         socket.disconnect()
-        print("Socket Disconnected!")
+        socket.on(clientEvent: .disconnect) {data, ack in
+            print("Socket Disconnected!")
+        }
     }
     
     func emitActiveDeliveryPartner(_ userId:String)
@@ -32,38 +67,76 @@ class SocketIOManager: NSObject
     
     func emitLocationUpdate(dpLatitude: String, dpLongitude: String)
     {
+//        let dpLocation = [
+//            "location" : [
+//                "latitude": dpLatitude,
+//                "longitude": dpLongitude
+//            ]
+//        ]
+        
         let dpLocation = [
-            "location" : [
-                "latitude": dpLatitude,
-                "longitude": dpLongitude
-            ]
+            "latitude": dpLatitude,
+            "longitude": dpLongitude
         ]
+        
+        //self.socket.emit("update location", dpLocation)
         self.socket.emit("update location", dpLocation)
+
     }
+    
+//    func onNewTask()->String?
+//    {
+//        var localOrderId:String?
+//
+//            self.socket.on("new task") { data, ack in
+//            print(data)
+//        do
+//        {
+//            print("Received New Task")
+//            let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+//            let orderDetail = try JSONDecoder().decode([OrderDetail].self, from: jsonData)
+//            print(orderDetail)
+//
+//            if let orderID = orderDetail.first?.orderId
+//            {
+//                print(orderID)
+//                localOrderId = orderID
+//            }
+//        }
+//        catch
+//        {
+//            print(error)
+//        }
+//        }
+//        return localOrderId
+//    }
     
     func onNewTask()->String?
     {
         var localOrderId:String?
-
-        self.socket.on("new task") { data, ack in
-        print(data)
-        do
-        {
-            print("Received New Task")
-            let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-            let orderDetail = try JSONDecoder().decode([OrderDetail].self, from: jsonData)
-            print(orderDetail)
+        
+        socket.on(clientEvent: .connect) {data, ack in
             
-            if let orderID = orderDetail.first?.orderId
-            {
-                print(orderID)
-                localOrderId = orderID
+            self.socket.on("new task") { data, ack in
+                print("new task:\(data)")
+                do
+                {
+                    print("Received New Task")
+                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                    let orderDetail = try JSONDecoder().decode([OrderDetail].self, from: jsonData)
+                    print(orderDetail)
+                    
+                    if let orderID = orderDetail.first?.orderId
+                    {
+                        print(orderID)
+                        localOrderId = orderID
+                    }
+                }
+                catch
+                {
+                    print(error)
+                }
             }
-        }
-        catch
-        {
-            print(error)
-        }
         }
         return localOrderId
     }

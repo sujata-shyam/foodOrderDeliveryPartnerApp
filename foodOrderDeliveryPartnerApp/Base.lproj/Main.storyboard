@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -171,20 +172,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPd-9q-XvQ" userLabel="lblNoOrder">
-                                <rect key="frame" x="10" y="194" width="394" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Pyt-yC-cM5"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="OJU-bL-mPT" userLabel="StackViewButtons">
-                                <rect key="frame" x="10" y="254" width="394" height="358.5"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90R-7T-fOC" userLabel="viewOrderDetails">
+                                <rect key="frame" x="0.0" y="64" width="414" height="627"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3UV-Ds-uBY" userLabel="lblTitle">
+                                        <rect key="frame" x="10" y="10" width="394" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="qIc-QZ-o9Q"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order ID:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SU3-Fc-oaQ" userLabel="lblOrderID">
+                                        <rect key="frame" x="10" y="60" width="394" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cH1-TS-EQq">
+                                        <rect key="frame" x="10" y="94" width="394" height="450.5"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Order Details" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MVN-X4-Cio" userLabel="txtViewDetails">
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="145"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Restaurant Details" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="S3k-qS-sN4" userLabel="txtViewRestaurantDetails">
+                                                <rect key="frame" x="0.0" y="153" width="394" height="144.5"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Client Address" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kkH-VC-cWa" userLabel="txtViewClientAddress">
+                                                <rect key="frame" x="0.0" y="305.5" width="394" height="145"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAK-1s-eXW" userLabel="btnAcceptOrder">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="109.5"/>
+                                        <rect key="frame" x="10" y="554.5" width="394" height="62.5"/>
                                         <color key="backgroundColor" name="Tan"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Accept Order">
@@ -199,47 +229,32 @@
                                             <action selector="btnAcceptOrderTapped:" destination="UEj-5Y-xRc" eventType="touchUpInside" id="wLn-cs-P5e"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Djy-Fa-Atw" userLabel="btnOrderPicked">
-                                        <rect key="frame" x="0.0" y="124.5" width="394" height="109.5"/>
-                                        <color key="backgroundColor" name="Tan"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Order Picked-Up">
-                                            <color key="titleColor" name="Fire Brick"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="btnOrderPickedUpTapped:" destination="UEj-5Y-xRc" eventType="touchUpInside" id="ISI-fI-Gzj"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K8l-DC-DcS" userLabel="btnOrderDelivered">
-                                        <rect key="frame" x="0.0" y="249" width="394" height="109.5"/>
-                                        <color key="backgroundColor" name="Tan"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Order Delivered">
-                                            <color key="titleColor" name="Fire Brick"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="btnOrderDeliveredTapped:" destination="UEj-5Y-xRc" eventType="touchUpInside" id="X2c-Bs-FfV"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
-                            </stackView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Great Job 👍🏼" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QH-68-4ac" userLabel="lblSuccess">
-                                <rect key="frame" x="10" y="428" width="394" height="40"/>
+                                <color key="backgroundColor" name="Rosy Brown"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Ees-Mv-8VR"/>
+                                    <constraint firstAttribute="trailing" secondItem="SU3-Fc-oaQ" secondAttribute="trailing" constant="10" id="6PY-CS-W2t"/>
+                                    <constraint firstItem="gAK-1s-eXW" firstAttribute="top" secondItem="cH1-TS-EQq" secondAttribute="bottom" constant="10" id="6ZR-NQ-s1f"/>
+                                    <constraint firstItem="gAK-1s-eXW" firstAttribute="leading" secondItem="90R-7T-fOC" secondAttribute="leading" constant="10" id="H08-gB-JpD"/>
+                                    <constraint firstItem="cH1-TS-EQq" firstAttribute="top" secondItem="SU3-Fc-oaQ" secondAttribute="bottom" constant="10" id="Ib9-eG-BFF"/>
+                                    <constraint firstAttribute="trailing" secondItem="3UV-Ds-uBY" secondAttribute="trailing" constant="10" id="IsI-Hq-UiE"/>
+                                    <constraint firstItem="SU3-Fc-oaQ" firstAttribute="leading" secondItem="90R-7T-fOC" secondAttribute="leading" constant="10" id="QiC-pL-bNY"/>
+                                    <constraint firstAttribute="trailing" secondItem="gAK-1s-eXW" secondAttribute="trailing" constant="10" id="QmL-ma-oYS"/>
+                                    <constraint firstItem="gAK-1s-eXW" firstAttribute="height" secondItem="90R-7T-fOC" secondAttribute="height" multiplier="0.1" id="bpF-wd-wnZ"/>
+                                    <constraint firstItem="3UV-Ds-uBY" firstAttribute="leading" secondItem="90R-7T-fOC" secondAttribute="leading" constant="10" id="cYu-4I-skx"/>
+                                    <constraint firstItem="SU3-Fc-oaQ" firstAttribute="top" secondItem="3UV-Ds-uBY" secondAttribute="bottom" constant="10" id="dcy-lD-W2x"/>
+                                    <constraint firstAttribute="trailing" secondItem="cH1-TS-EQq" secondAttribute="trailing" constant="10" id="nmn-WL-mni"/>
+                                    <constraint firstItem="cH1-TS-EQq" firstAttribute="leading" secondItem="90R-7T-fOC" secondAttribute="leading" constant="10" id="ojY-Ay-yAs"/>
+                                    <constraint firstItem="3UV-Ds-uBY" firstAttribute="top" secondItem="90R-7T-fOC" secondAttribute="top" constant="10" id="ron-FF-A9C"/>
+                                    <constraint firstAttribute="bottom" secondItem="gAK-1s-eXW" secondAttribute="bottom" constant="10" id="ukS-hM-Cz4"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <color key="textColor" name="Fire Brick"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPd-9q-XvQ" userLabel="lblNoOrder">
+                                <rect key="frame" x="162.5" y="423" width="89.5" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Pyt-yC-cM5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzp-Jc-5m8" userLabel="btnLogout">
@@ -256,35 +271,103 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="OJU-bL-mPT" secondAttribute="trailing" constant="10" id="0Y8-FB-Byi"/>
-                            <constraint firstItem="OJU-bL-mPT" firstAttribute="leading" secondItem="AZK-Hf-mw0" secondAttribute="leading" constant="10" id="6fi-B6-2NG"/>
-                            <constraint firstItem="rPd-9q-XvQ" firstAttribute="top" secondItem="BJz-LZ-JuL" secondAttribute="top" constant="150" id="8bN-QY-7Lz"/>
+                            <constraint firstItem="rPd-9q-XvQ" firstAttribute="centerY" secondItem="AZK-Hf-mw0" secondAttribute="centerY" id="60i-CF-UgT"/>
                             <constraint firstItem="BJz-LZ-JuL" firstAttribute="trailing" secondItem="gzp-Jc-5m8" secondAttribute="trailing" constant="15" id="Aey-bK-26h"/>
+                            <constraint firstItem="90R-7T-fOC" firstAttribute="height" secondItem="AZK-Hf-mw0" secondAttribute="height" multiplier="0.7" id="FZu-AO-T5K"/>
                             <constraint firstItem="gzp-Jc-5m8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BJz-LZ-JuL" secondAttribute="leading" symbolic="YES" id="QYp-Ah-z7W"/>
-                            <constraint firstItem="rPd-9q-XvQ" firstAttribute="leading" secondItem="BJz-LZ-JuL" secondAttribute="leading" constant="10" id="Qh8-7e-Fbx"/>
-                            <constraint firstItem="1QH-68-4ac" firstAttribute="leading" secondItem="BJz-LZ-JuL" secondAttribute="leading" constant="10" id="RUh-4o-SUl"/>
-                            <constraint firstItem="BJz-LZ-JuL" firstAttribute="trailing" secondItem="rPd-9q-XvQ" secondAttribute="trailing" constant="10" id="VNP-NZ-YbK"/>
-                            <constraint firstItem="1QH-68-4ac" firstAttribute="centerY" secondItem="AZK-Hf-mw0" secondAttribute="centerY" id="WZB-de-S7O"/>
-                            <constraint firstItem="OJU-bL-mPT" firstAttribute="height" secondItem="AZK-Hf-mw0" secondAttribute="height" multiplier="0.4" id="ZXb-ug-2fe"/>
-                            <constraint firstItem="BJz-LZ-JuL" firstAttribute="trailing" secondItem="1QH-68-4ac" secondAttribute="trailing" constant="10" id="aDG-Sd-FU2"/>
                             <constraint firstItem="gzp-Jc-5m8" firstAttribute="top" secondItem="BJz-LZ-JuL" secondAttribute="top" constant="5" id="aRU-P4-0hQ"/>
-                            <constraint firstItem="OJU-bL-mPT" firstAttribute="top" secondItem="rPd-9q-XvQ" secondAttribute="bottom" constant="10" id="dDc-UB-TEv"/>
+                            <constraint firstItem="90R-7T-fOC" firstAttribute="leading" secondItem="BJz-LZ-JuL" secondAttribute="leading" id="dAS-c6-86a"/>
+                            <constraint firstItem="rPd-9q-XvQ" firstAttribute="centerX" secondItem="AZK-Hf-mw0" secondAttribute="centerX" id="eHy-Wg-2TN"/>
+                            <constraint firstItem="BJz-LZ-JuL" firstAttribute="trailing" secondItem="90R-7T-fOC" secondAttribute="trailing" id="pzf-SZ-lln"/>
+                            <constraint firstItem="90R-7T-fOC" firstAttribute="top" secondItem="BJz-LZ-JuL" secondAttribute="top" constant="20" id="u4G-Wt-760"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BJz-LZ-JuL"/>
                     </view>
                     <connections>
-                        <outlet property="StackViewButtons" destination="OJU-bL-mPT" id="dCm-zQ-ddi"/>
-                        <outlet property="btnAcceptOrder" destination="gAK-1s-eXW" id="fay-FR-Orf"/>
-                        <outlet property="btnOrderDelivered" destination="K8l-DC-DcS" id="JEj-NS-QkR"/>
-                        <outlet property="btnOrderPicked" destination="Djy-Fa-Atw" id="UJO-kw-3uQ"/>
                         <outlet property="lblNoOrder" destination="rPd-9q-XvQ" id="SaM-eN-mVU"/>
-                        <outlet property="lblSuccess" destination="1QH-68-4ac" id="tBq-FJ-uxY"/>
+                        <outlet property="lblOrderID" destination="SU3-Fc-oaQ" id="CK8-bw-MnU"/>
+                        <outlet property="txtViewDetails" destination="MVN-X4-Cio" id="YMb-mH-Pdg"/>
+                        <outlet property="viewOrderDetails" destination="90R-7T-fOC" id="83m-Za-I2x"/>
                         <segue destination="RCZ-Q1-iPj" kind="unwind" identifier="unwindToLogin" unwindAction="unwindTologinVCWithSegue:" id="20U-hS-Hr4"/>
+                        <segue destination="sYt-zW-sAJ" kind="show" identifier="goToMaps" id="vlK-6V-8OP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mVH-W9-hPr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4904" y="66"/>
+            <point key="canvasLocation" x="4902.898550724638" y="65.625"/>
+        </scene>
+        <!--mapViewController-->
+        <scene sceneID="QUR-Hr-mu1">
+            <objects>
+                <viewController id="sYt-zW-sAJ" userLabel="mapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="O8X-Fe-nbs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Jzy-xH-XkW" userLabel="mapView">
+                                <rect key="frame" x="10" y="54" width="394" height="627"/>
+                            </mapView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Great Job 👍🏼" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QH-68-4ac" userLabel="lblSuccess">
+                                <rect key="frame" x="10" y="433" width="394" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Ees-Mv-8VR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" name="Fire Brick"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="OJU-bL-mPT" userLabel="StackViewButtons">
+                                <rect key="frame" x="10" y="691" width="394" height="134.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Djy-Fa-Atw" userLabel="btnOrderPicked">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="60"/>
+                                        <color key="backgroundColor" name="Tan"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Order Picked-Up">
+                                            <color key="titleColor" name="Fire Brick"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K8l-DC-DcS" userLabel="btnOrderDelivered">
+                                        <rect key="frame" x="0.0" y="75" width="394" height="59.5"/>
+                                        <color key="backgroundColor" name="Tan"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Order Delivered">
+                                            <color key="titleColor" name="Fire Brick"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jrq-9c-Wxl" firstAttribute="trailing" secondItem="1QH-68-4ac" secondAttribute="trailing" constant="10" id="1R4-ff-ojB"/>
+                            <constraint firstItem="OJU-bL-mPT" firstAttribute="leading" secondItem="jrq-9c-Wxl" secondAttribute="leading" constant="10" id="5hZ-Io-F5G"/>
+                            <constraint firstItem="Jzy-xH-XkW" firstAttribute="leading" secondItem="jrq-9c-Wxl" secondAttribute="leading" constant="10" id="6ff-AM-kW8"/>
+                            <constraint firstItem="Jzy-xH-XkW" firstAttribute="top" secondItem="jrq-9c-Wxl" secondAttribute="top" constant="10" id="8J3-N3-Vlo"/>
+                            <constraint firstItem="Jzy-xH-XkW" firstAttribute="height" secondItem="O8X-Fe-nbs" secondAttribute="height" multiplier="0.7" id="E4s-yf-xp6"/>
+                            <constraint firstItem="1QH-68-4ac" firstAttribute="leading" secondItem="jrq-9c-Wxl" secondAttribute="leading" constant="10" id="UpM-Dc-Dsc"/>
+                            <constraint firstItem="OJU-bL-mPT" firstAttribute="height" secondItem="O8X-Fe-nbs" secondAttribute="height" multiplier="0.15" id="Vst-cw-3sA"/>
+                            <constraint firstItem="OJU-bL-mPT" firstAttribute="top" secondItem="Jzy-xH-XkW" secondAttribute="bottom" constant="10" id="eIN-rg-U3k"/>
+                            <constraint firstItem="jrq-9c-Wxl" firstAttribute="trailing" secondItem="Jzy-xH-XkW" secondAttribute="trailing" constant="10" id="l3S-CR-8wv"/>
+                            <constraint firstItem="1QH-68-4ac" firstAttribute="centerY" secondItem="jrq-9c-Wxl" secondAttribute="centerY" id="nrc-FT-fbf"/>
+                            <constraint firstItem="jrq-9c-Wxl" firstAttribute="trailing" secondItem="OJU-bL-mPT" secondAttribute="trailing" constant="10" id="p8j-In-C9I"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jrq-9c-Wxl"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B38-FO-h2W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5773.913043478261" y="69.642857142857139"/>
         </scene>
     </scenes>
     <resources>

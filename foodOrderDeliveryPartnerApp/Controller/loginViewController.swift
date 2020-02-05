@@ -26,6 +26,7 @@ class loginViewController: UIViewController
         setTextDelegate()
         
         //LocationManager.shared.start() //Commented on 4th Feb
+        //SocketIOManager.sharedInstance.onNewTask() //Commented on 5th Feb
     }
 
     func setTitleLabelUI()
@@ -110,7 +111,6 @@ class loginViewController: UIViewController
                         CLLocationManager.authorizationStatus() == .authorizedAlways)
                     {
                         self.saveUserDetailsLocally(loginResponse)
-                        //SocketIOManager.sharedInstance.establishConnection()
 
                         if(SocketIOManager.sharedInstance.socket.status == .connected)
                         {
@@ -121,40 +121,22 @@ class loginViewController: UIViewController
                                 
                                 print("YES, YES, YES, GOT THE LAT. AND LONG.")
                                 
-                                //SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
-                                
-                                /////////////////////////////////
-                                //for spice curry
-                            //SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
-                                
-                                //For Sway
-                                SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "13.020890300000001",dpLongitude: "77.643156")
+                                SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
                                 
                             DispatchQueue.main.async
                             {
                                 Timer.scheduledTimer(withTimeInterval: 20, repeats: true) { timer in
                                     
                                     print("TIMER")
-//                                    SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
-                                    
-                                   
-                                    SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "13.020890300000001",dpLongitude: "77.643156")
-                                    
-                                    //SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
+                                    SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
                                 }
                             }
-                                //////////////////////////////
                                 
-                                
-                                SocketIOManager.sharedInstance.onNewTask()
+                            //SocketIOManager.sharedInstance.onNewTask()//Commented on 5th Feb
                             }
-                            
                         }
                         else
                         {
-                            //SocketIOManager.sharedInstance.establishConnection()
-                            //SocketIOManager.sharedInstance.emitActiveDeliveryPartner(loginResponse.id!)
-                            
                             print("SOCKET STILL NOT CONNECTED")
                         }
                     

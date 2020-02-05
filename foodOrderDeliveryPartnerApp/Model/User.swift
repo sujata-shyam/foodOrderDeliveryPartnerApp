@@ -22,3 +22,9 @@ struct LoginResponse:Codable
 }
 
 
+//TEMP CODE. DELETE AFTER THOROUGH TESTING
+
+//for spice curry
+//SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
+//For Sway
+//SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "13.020890300000001",dpLongitude: "77.643156")

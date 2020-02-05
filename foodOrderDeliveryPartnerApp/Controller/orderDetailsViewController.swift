@@ -17,21 +17,57 @@ class orderDetailsViewController: UIViewController
     var orderId : String?
     
     @IBOutlet weak var lblNoOrder: UILabel!
-    @IBOutlet weak var btnAcceptOrder: UIButton!
-    @IBOutlet weak var btnOrderPicked: UIButton!
-    @IBOutlet weak var btnOrderDelivered: UIButton!
-    @IBOutlet weak var StackViewButtons: UIStackView!
-    @IBOutlet weak var lblSuccess: UILabel!
+    
+    @IBOutlet weak var viewOrderDetails: UIView!
+    @IBOutlet weak var lblOrderID: UILabel!
+    @IBOutlet weak var txtViewDetails: UITextView!
+    
+    //@IBOutlet weak var btnAcceptOrder: UIButton!
+    //@IBOutlet weak var btnOrderPicked: UIButton!
+    //@IBOutlet weak var btnOrderDelivered: UIButton!
+    //@IBOutlet weak var StackViewButtons: UIStackView!
+    //@IBOutlet weak var lblSuccess: UILabel!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleIncomingOrder), name: NSNotification.Name("gotOrderDetail"), object: nil)
+        
         //self.socket = self.manager.defaultSocket
-   
 //        print(locationManager.location?.coordinate.latitude as Any)
 //        print(locationManager.location?.coordinate.longitude as Any)
-
         //setSocketEvents()
+    }
+    
+    @objc func handleIncomingOrder(notification: Notification)
+    {
+        let orderDetail = notification.object as! [OrderDetail]
+        
+        //print("Notification orderDetail: \(orderDetail)")
+        
+        if let orderID = orderDetail.first?.orderId
+        {
+            print("Notification orderID: \(orderID)")
+            
+            self.orderId = orderID
+            let orderItem = Array(orderDetail.first!.cartItems!.values) as! [CartItemDetail]
+           
+            DispatchQueue.main.async
+            {
+                    self.lblNoOrder.isHidden = true
+                    self.viewOrderDetails.isHidden = false
+                    self.lblOrderID.text = orderID
+            }
+        }
+        else
+        {
+            DispatchQueue.main.async
+                {
+                    self.lblNoOrder.isHidden = false
+                    self.viewOrderDetails.isHidden = true
+            }
+        }
     }
     
     //MARK:- Socket functions
@@ -150,10 +186,12 @@ class orderDetailsViewController: UIViewController
         {
             //self.socket.emit("task accepted", self.orderId!)
             SocketIOManager.sharedInstance.emitTaskAcception(self.orderId!)
-            
+            //uncomment later
+            /*
             self.btnAcceptOrder.isEnabled = false
             self.btnOrderPicked.isEnabled = true
             self.btnOrderDelivered.isEnabled = false
+            */
         }
     }
     
@@ -161,16 +199,19 @@ class orderDetailsViewController: UIViewController
     {
         SocketIOManager.sharedInstance.emitOrderPicked()
         
+        //uncomment later
+        /*
         self.btnAcceptOrder.isEnabled = false
         self.btnOrderPicked.isEnabled = false
         self.btnOrderDelivered.isEnabled = true
+        */
     }
     
     @IBAction func btnOrderDeliveredTapped(_ sender: UIButton)
     {
         SocketIOManager.sharedInstance.emitOrderDelivered()
-        self.StackViewButtons.isHidden = true
-        self.lblSuccess.isHidden = false
+        //self.StackViewButtons.isHidden = true
+        //self.lblSuccess.isHidden = false
         
         //locationManager.stopUpdatingLocation()
         LocationManager.shared.stop()
