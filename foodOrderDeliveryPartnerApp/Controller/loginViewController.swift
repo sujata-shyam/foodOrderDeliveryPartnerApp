@@ -118,9 +118,6 @@ class loginViewController: UIViewController
                             
                             if let initialLat = defaults.string(forKey: "initialLatitude"), let initialLong = defaults.string(forKey: "initialLongitude")
                             {
-                                
-                                print("YES, YES, YES, GOT THE LAT. AND LONG.")
-                                
                                 SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
                                 
                             DispatchQueue.main.async

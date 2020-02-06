@@ -8,6 +8,7 @@ class SocketIOManager: NSObject
     
     //let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true), .compress])
     //let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true),.forceWebsockets(true)])
+    
     let manager = SocketManager(socketURL: URL(string: "https://tummypolice.iyangi.com")!, config: [.log(true)])
 
     override init()
@@ -146,13 +147,25 @@ class SocketIOManager: NSObject
         self.socket.emit("task accepted", orderId)
     }
     
-    func emitOrderPicked()
+
+    func emitOrderPicked(_ orderId: String)
     {
-        self.socket.emit("order pickedup")
+        print("emitOrderPicked")
+        
+        let details = [
+            "orderId": orderId, "deliveryPartnerId": defaults.string(forKey: "userId")
+        ]
+        
+        self.socket.emit("order pickedup", details)
     }
     
-    func emitOrderDelivered()
+    func emitOrderDelivered(_ orderId: String)
     {
-        socket.emit("order delivered")
+        print("emitOrderDelivered")
+        
+        let details = [
+            "orderId": orderId, "deliveryPartnerId": defaults.string(forKey: "userId")
+        ]
+        socket.emit("order delivered", details)
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		850B105523EC16D1004DF4D1 /* mapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B105423EC16D1004DF4D1 /* mapViewController.swift */; };
+		850B105723EC1E72004DF4D1 /* completionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B105623EC1E72004DF4D1 /* completionViewController.swift */; };
 		850F031D23CDD7780057F9C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F031C23CDD7780057F9C4 /* AppDelegate.swift */; };
 		850F031F23CDD7780057F9C4 /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F031E23CDD7780057F9C4 /* loginViewController.swift */; };
 		850F032223CDD7780057F9C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 850F032023CDD7780057F9C4 /* Main.storyboard */; };
@@ -25,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		16681D31F9165CDBC454E415 /* Pods-foodOrderDeliveryPartnerApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodOrderDeliveryPartnerApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-foodOrderDeliveryPartnerApp/Pods-foodOrderDeliveryPartnerApp.release.xcconfig"; sourceTree = "<group>"; };
+		850B105423EC16D1004DF4D1 /* mapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapViewController.swift; sourceTree = "<group>"; };
+		850B105623EC1E72004DF4D1 /* completionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = completionViewController.swift; sourceTree = "<group>"; };
 		850F031923CDD7780057F9C4 /* foodOrderDeliveryPartnerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = foodOrderDeliveryPartnerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		850F031C23CDD7780057F9C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		850F031E23CDD7780057F9C4 /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +70,25 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		850B105223EBFF44004DF4D1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				850F032023CDD7780057F9C4 /* Main.storyboard */,
+				850F032523CDD77E0057F9C4 /* LaunchScreen.storyboard */,
+				850F032E23CDDB8A0057F9C4 /* Colour.xcassets */,
+				850F032323CDD77E0057F9C4 /* Assets.xcassets */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		850B105323EBFF72004DF4D1 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				850F031C23CDD7780057F9C4 /* AppDelegate.swift */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
 		850F031023CDD7780057F9C4 = {
 			isa = PBXGroup;
 			children = (
@@ -87,17 +110,12 @@
 		850F031B23CDD7780057F9C4 /* foodOrderDeliveryPartnerApp */ = {
 			isa = PBXGroup;
 			children = (
+				850B105323EBFF72004DF4D1 /* SupportingFiles */,
+				850B105223EBFF44004DF4D1 /* View */,
+				85A1A04323CF2D70008F961C /* Controller */,
 				85A1A04923CF2F01008F961C /* Model */,
 				85A1A04623CF2E94008F961C /* Global */,
-				85A1A04323CF2D70008F961C /* Controller */,
-				850F031C23CDD7780057F9C4 /* AppDelegate.swift */,
-				850F032023CDD7780057F9C4 /* Main.storyboard */,
-				850F032323CDD77E0057F9C4 /* Assets.xcassets */,
-				850F032E23CDDB8A0057F9C4 /* Colour.xcassets */,
-				850F032523CDD77E0057F9C4 /* LaunchScreen.storyboard */,
 				850F032823CDD77E0057F9C4 /* Info.plist */,
-				85A3EB9D23DEE9FE006DE090 /* SocketIOManager.swift */,
-				85A3EB9F23E02D43006DE090 /* LocationManager.swift */,
 			);
 			path = foodOrderDeliveryPartnerApp;
 			sourceTree = "<group>";
@@ -107,6 +125,8 @@
 			children = (
 				850F031E23CDD7780057F9C4 /* loginViewController.swift */,
 				851BC24C23D5B7A6004B1E18 /* orderDetailsViewController.swift */,
+				850B105423EC16D1004DF4D1 /* mapViewController.swift */,
+				850B105623EC1E72004DF4D1 /* completionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -115,6 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				85A1A04723CF2EA8008F961C /* GlobalFunctions.swift */,
+				85A3EB9D23DEE9FE006DE090 /* SocketIOManager.swift */,
+				85A3EB9F23E02D43006DE090 /* LocationManager.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -264,8 +286,10 @@
 				850F031F23CDD7780057F9C4 /* loginViewController.swift in Sources */,
 				850F031D23CDD7780057F9C4 /* AppDelegate.swift in Sources */,
 				85A3EB9E23DEE9FE006DE090 /* SocketIOManager.swift in Sources */,
+				850B105723EC1E72004DF4D1 /* completionViewController.swift in Sources */,
 				85A3EBA023E02D43006DE090 /* LocationManager.swift in Sources */,
 				85A1A04823CF2EA8008F961C /* GlobalFunctions.swift in Sources */,
+				850B105523EC16D1004DF4D1 /* mapViewController.swift in Sources */,
 				851BC24D23D5B7A6004B1E18 /* orderDetailsViewController.swift in Sources */,
 				85A1A04B23CF2F2A008F961C /* User.swift in Sources */,
 			);
