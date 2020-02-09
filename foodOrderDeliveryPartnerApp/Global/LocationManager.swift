@@ -14,6 +14,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate
 {
     static let shared = LocationManager()
     let locationManager : CLLocationManager
+    var currentLocation: CLLocation!
     
     override init()
     {
@@ -31,6 +32,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate
     func start()
     {
         locationManager.requestAlwaysAuthorization()
+        
     }
     
     func stop()
@@ -75,6 +77,10 @@ class LocationManager: NSObject, CLLocationManagerDelegate
             //Sway (Kalyan Nagar)
 //            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "13.020890300000001",dpLongitude: "77.643156")
 //
+            
+            //Added on 7th Feb
+            
+            currentLocation = location
         }
     }
     
@@ -117,6 +123,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate
         
         //locationManager.startUpdatingLocation() //Commented on 4th Feb
         locationManager.requestLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion)
+    {
+        
+        NotificationCenter.default.post(name: NSNotification.Name("enteredRegion"), object: self)
     }
     
 }

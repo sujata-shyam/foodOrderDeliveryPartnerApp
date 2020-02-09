@@ -127,9 +127,7 @@ class loginViewController: UIViewController
                                     print("TIMER")
                                     SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
                                 }
-                            }
-                                
-                            //SocketIOManager.sharedInstance.onNewTask()//Commented on 5th Feb
+                            }                                
                             }
                         }
                         else

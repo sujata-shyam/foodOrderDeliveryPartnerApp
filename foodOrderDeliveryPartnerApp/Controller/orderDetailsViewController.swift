@@ -13,9 +13,9 @@ import UIKit
 class orderDetailsViewController: UIViewController
 {
     var orderId : String?
+    var clientLocation: Location?
     
     @IBOutlet weak var lblNoOrder: UILabel!
-    
     @IBOutlet weak var viewOrderDetails: UIView!
     @IBOutlet weak var lblOrderID: UILabel!
     @IBOutlet weak var txtViewDetails: UITextView!
@@ -25,11 +25,6 @@ class orderDetailsViewController: UIViewController
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleIncomingOrder), name: NSNotification.Name("gotOrderDetail"), object: nil)
-        
-        //self.socket = self.manager.defaultSocket
-//        print(locationManager.location?.coordinate.latitude as Any)
-//        print(locationManager.location?.coordinate.longitude as Any)
-        //setSocketEvents()
     }
     
     @objc func handleIncomingOrder(notification: Notification)
@@ -41,6 +36,8 @@ class orderDetailsViewController: UIViewController
             print("Notification orderID: \(orderID)")
             
             self.orderId = orderID
+            self.clientLocation = orderDetail.first?.location
+            
             let orderItem = Array(orderDetail.first!.cartItems!.values) as! [CartItemDetail]
            
             DispatchQueue.main.async
@@ -75,6 +72,7 @@ class orderDetailsViewController: UIViewController
         if let mapVC = segue.destination as? mapViewController
         {
             mapVC.orderId = self.orderId
+            mapVC.clientLocation = self.clientLocation
         }
     }
     
