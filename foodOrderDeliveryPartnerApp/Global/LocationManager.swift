@@ -124,11 +124,4 @@ class LocationManager: NSObject, CLLocationManagerDelegate
         //locationManager.startUpdatingLocation() //Commented on 4th Feb
         locationManager.requestLocation()
     }
-    
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion)
-    {
-        
-        NotificationCenter.default.post(name: NSNotification.Name("enteredRegion"), object: self)
-    }
-    
 }

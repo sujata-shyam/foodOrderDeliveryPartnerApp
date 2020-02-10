@@ -37,4 +37,14 @@ struct OrderDetail:Codable
     let restaurantId : String?
 }
 
+struct Restaurant:Codable
+{
+    let id : String?
+    let name : String?
+    let description : String?
+    let city : String?
+    let location: String?
+    let latitude: String?
+    let longitude: String?
+}
 
