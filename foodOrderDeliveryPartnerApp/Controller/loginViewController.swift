@@ -17,6 +17,8 @@ class loginViewController: UIViewController
     
     @IBOutlet weak var viewLogin: UIView!
     
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -24,9 +26,6 @@ class loginViewController: UIViewController
         setTitleLabelUI()
         setViewLogin()
         setTextDelegate()
-        
-        //LocationManager.shared.start() //Commented on 4th Feb
-        //SocketIOManager.sharedInstance.onNewTask() //Commented on 5th Feb
     }
 
     func setTitleLabelUI()

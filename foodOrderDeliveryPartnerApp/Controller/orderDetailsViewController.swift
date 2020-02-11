@@ -30,12 +30,14 @@ class orderDetailsViewController: UIViewController
         NotificationCenter.default.addObserver(self, selector: #selector(handleIncomingOrder), name: NSNotification.Name("gotOrderDetail"), object: nil)
     }
     
+    //DISABLE TIMER IN THIS FUNCTION
     @objc func handleIncomingOrder(notification: Notification)
     {
         let orderDetail = notification.object as! [OrderDetail]        
         
         if let orderID = orderDetail.first?.orderId
         {
+            
             self.orderId = orderID
             
             if let restaurantID = orderDetail.first?.restaurantId
