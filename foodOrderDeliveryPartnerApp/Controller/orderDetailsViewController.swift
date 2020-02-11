@@ -37,6 +37,9 @@ class orderDetailsViewController: UIViewController
         
         if let orderID = orderDetail.first?.orderId
         {
+            timer?.invalidate()
+            timer = nil
+            print("TIMER INVALIDATED")
             
             self.orderId = orderID
             

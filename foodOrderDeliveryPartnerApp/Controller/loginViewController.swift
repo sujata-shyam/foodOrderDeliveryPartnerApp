@@ -17,8 +17,6 @@ class loginViewController: UIViewController
     
     @IBOutlet weak var viewLogin: UIView!
     
-    
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -121,12 +119,17 @@ class loginViewController: UIViewController
                                 
                             DispatchQueue.main.async
                             {
-                                Timer.scheduledTimer(withTimeInterval: 20, repeats: true) { timer in
+//                                Timer.scheduledTimer(withTimeInterval: 20, repeats: true) { timer in
+//
+//                                    print("TIMER STARTED")
+//                                    SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
+//                                }
+                                timer = Timer.scheduledTimer(withTimeInterval: 20, repeats: true) { timer in
                                     
-                                    print("TIMER")
+                                    print("TIMER STARTED")
                                     SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
                                 }
-                            }                                
+                                }
                             }
                         }
                         else

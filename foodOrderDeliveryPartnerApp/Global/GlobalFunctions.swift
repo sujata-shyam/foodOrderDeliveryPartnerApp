@@ -9,6 +9,7 @@
 import UIKit
 
 let defaults = UserDefaults.standard
+var timer:Timer?
 
 func displayAlert(vc: UIViewController, title: String, message: String)
 {
