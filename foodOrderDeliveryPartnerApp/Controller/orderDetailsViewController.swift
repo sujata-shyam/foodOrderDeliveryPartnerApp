@@ -30,16 +30,15 @@ class orderDetailsViewController: UIViewController
         NotificationCenter.default.addObserver(self, selector: #selector(handleIncomingOrder), name: NSNotification.Name("gotOrderDetail"), object: nil)
     }
     
-    //DISABLE TIMER IN THIS FUNCTION
     @objc func handleIncomingOrder(notification: Notification)
     {
         let orderDetail = notification.object as! [OrderDetail]        
         
         if let orderID = orderDetail.first?.orderId
         {
-            timer?.invalidate()
-            timer = nil
-            print("TIMER INVALIDATED")
+//            timer?.invalidate()
+//            timer = nil
+//            print("TIMER INVALIDATED")
             
             self.orderId = orderID
             
@@ -49,8 +48,6 @@ class orderDetailsViewController: UIViewController
                     self.getRestaurantDetails(restaurantID)
                 }
             }
-            
-            //self.clientLocation = orderDetail.first?.location
             
             if let userLocation = orderDetail.first?.location
             {
@@ -154,10 +151,14 @@ class orderDetailsViewController: UIViewController
     
     func getUserAddress(_ userAddress: Location)
     {
-        //DO NOT DELETE
+        //DO NOT DELETE. ORIGINAL CODE
         //let location = CLLocation(latitude: Double((userAddress.latitude)!)!, longitude: Double((userAddress.longitude)!)!)
         
-        let location = CLLocation(latitude:12.9615402 , longitude: 77.6441973) //For geekSkool//FOR TESTING
+        //let clientLocation = CLLocation(latitude:13.025232483644993, longitude:77.65087198473294) //For SPT //FOR SIMULATOR
+        
+        let location = CLLocation(latitude:12.9615402 , longitude: 77.6441973) //For geekSkool//FOR SIMULATOR
+        
+        
         
         CLGeocoder().reverseGeocodeLocation(location, preferredLocale: .autoupdatingCurrent) { (clPlacemark: [CLPlacemark]?, error: Error?) in
             guard let place = clPlacemark?.first else {
@@ -191,6 +192,12 @@ class orderDetailsViewController: UIViewController
         if(orderId != nil)
         {
             SocketIOManager.sharedInstance.emitTaskAcception(self.orderId!)
+            /////
+            timer?.invalidate()
+            timer = nil
+            print("TIMER INVALIDATED")
+            /////
+            
             performSegue(withIdentifier: "goToMaps", sender: self)
         }
     }

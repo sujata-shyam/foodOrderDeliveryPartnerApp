@@ -27,6 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func applicationWillTerminate(_ application: UIApplication)
     {
         SocketIOManager.sharedInstance.closeConnection()
+        
+        //////Feb 11th
+        LocationManager.shared.stop()
     }
 }
 

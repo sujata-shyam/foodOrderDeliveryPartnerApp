@@ -113,17 +113,15 @@ class loginViewController: UIViewController
                         {
                        SocketIOManager.sharedInstance.emitActiveDeliveryPartner(loginResponse.id!)
                             
+                            //Below commented on 11th Feb
+                            //Code for emitting Location Update on Login
+                            /*
                             if let initialLat = defaults.string(forKey: "initialLatitude"), let initialLong = defaults.string(forKey: "initialLongitude")
                             {
                                 SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
                                 
                             DispatchQueue.main.async
                             {
-//                                Timer.scheduledTimer(withTimeInterval: 20, repeats: true) { timer in
-//
-//                                    print("TIMER STARTED")
-//                                    SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
-//                                }
                                 timer = Timer.scheduledTimer(withTimeInterval: 20, repeats: true) { timer in
                                     
                                     print("TIMER STARTED")
@@ -131,6 +129,7 @@ class loginViewController: UIViewController
                                 }
                                 }
                             }
+                            */
                         }
                         else
                         {

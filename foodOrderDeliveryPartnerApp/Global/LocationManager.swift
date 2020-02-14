@@ -32,7 +32,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate
     func start()
     {
         locationManager.requestAlwaysAuthorization()
-        
     }
     
     func stop()
@@ -46,41 +45,31 @@ class LocationManager: NSObject, CLLocationManagerDelegate
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
-    {
-        
-        //locationManager.stopUpdatingLocation()
-
-        //if let location = locations.last //For startUpdatingLocation()
-        
-        
-        if let location = locations.first //For requestlocation()
+    {        
+        if let location = locations.last
         {
-            //Below: Added on 4th Feb
+            currentLocation = location
+            
+            //if defaults.bool(forKey: "isUserLoggedIn")
+            //{
+                SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude:"\(location.coordinate.longitude)")
+                
+                if(timerStarted == false)
+                {
+                    timer = Timer.scheduledTimer(withTimeInterval: 20, repeats: true) { timer in
+                        print("TIMER STARTED")
+                        SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude:"\(location.coordinate.longitude)")
+                    }
+                    timerStarted = true
+                }
+            //}
+            
+            /*
             defaults.set("\(location.coordinate.latitude)", forKey: "initialLatitude")
             defaults.set("\(location.coordinate.longitude)", forKey: "initialLongitude")
-            
             print("initialLatitude: \(location.coordinate.latitude)")
             print("initialLongitude: \(location.coordinate.longitude)")
-
-            //Above: Added on 4th Feb
-            
-            //Below: Commented on 4th Feb
-            /*  SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude: "\(location.coordinate.longitude)")
-
-             */
-            //Above: Commented on 4th Feb
-
-            //For Testing
-            //Spice Kitchen(GeekSkool)
-            //SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "12.981264900000001", dpLongitude: "77.6461579")
-//
-            //Sway (Kalyan Nagar)
-//            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "13.020890300000001",dpLongitude: "77.643156")
-//
-            
-            //Added on 7th Feb
-            
-            currentLocation = location
+            */
         }
     }
     
@@ -121,7 +110,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate
             return
         }
         
-        //locationManager.startUpdatingLocation() //Commented on 4th Feb
-        locationManager.requestLocation()
+        locationManager.startUpdatingLocation()
+        //locationManager.requestLocation()//Commented on 11th Feb
     }
 }

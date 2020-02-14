@@ -10,6 +10,7 @@ import UIKit
 
 let defaults = UserDefaults.standard
 var timer:Timer?
+var timerStarted = false
 
 func displayAlert(vc: UIViewController, title: String, message: String)
 {

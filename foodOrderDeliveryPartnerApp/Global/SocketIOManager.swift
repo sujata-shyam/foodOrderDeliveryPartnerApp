@@ -24,17 +24,13 @@ class SocketIOManager: NSObject
         socket.on(clientEvent: .connect) {data, ack in
             print("Socket Connected!")
             self.socket.on("new task") { data, ack in
-                //print("new task:\(data)")
                 do
                 {
-                    //print("Received New Task")
                     let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
                     let orderDetail = try JSONDecoder().decode([OrderDetail].self, from: jsonData)
-                    //print(orderDetail)
                     
                     if let _ = orderDetail.first?.orderId
                     {
-                        //print("orderID:\(orderID)")
                         NotificationCenter.default.post(name: NSNotification.Name("gotOrderDetail"), object: orderDetail)
                     }
                 }
@@ -68,47 +64,13 @@ class SocketIOManager: NSObject
         self.socket.emit("update location", dpLocation)
     }
     
-//    func onNewTask()->String?
-//    {
-//        var localOrderId:String?
-//
-//        socket.on(clientEvent: .connect) {data, ack in
-//
-//            self.socket.on("new task") { data, ack in
-//                print("new task:\(data)")
-//                do
-//                {
-//                    print("Received New Task")
-//                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-//                    let orderDetail = try JSONDecoder().decode([OrderDetail].self, from: jsonData)
-//                    print(orderDetail)
-//
-//                    if let orderID = orderDetail.first?.orderId
-//                    {
-//                        print(orderID)
-//                        localOrderId = orderID
-//                    }
-//                }
-//                catch
-//                {
-//                    print(error)
-//                }
-//            }
-//        }
-//        return localOrderId
-//    }
-    
-    //START THE LOCATION startUpdatingLocation in the below function
     func emitTaskAcception(_ orderId: String)
     {
         self.socket.emit("task accepted", orderId)
     }
     
-
     func emitOrderPicked(_ orderId: String)
     {
-        //print("emitOrderPicked")
-        
         let details = [
             "orderId": orderId, "deliveryPartnerId": defaults.string(forKey: "userId")
         ]
@@ -116,11 +78,8 @@ class SocketIOManager: NSObject
         self.socket.emit("order pickedup", details)
     }
     
-    //STOP THE LOCATION stopUpdatingLocation in the below function
     func emitOrderDelivered(_ orderId: String)
     {
-        //print("emitOrderDelivered")
-        
         let details = [
             "orderId": orderId, "deliveryPartnerId": defaults.string(forKey: "userId")
         ]
