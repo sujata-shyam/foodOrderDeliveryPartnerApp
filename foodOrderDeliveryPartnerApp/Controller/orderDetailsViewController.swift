@@ -149,14 +149,15 @@ class orderDetailsViewController: UIViewController
         }
     }
     
+    //Below function for reverse geo-coding
     func getUserAddress(_ userAddress: Location)
     {
         //DO NOT DELETE. ORIGINAL CODE
-        //let location = CLLocation(latitude: Double((userAddress.latitude)!)!, longitude: Double((userAddress.longitude)!)!)
+        let location = CLLocation(latitude: Double((userAddress.latitude)!)!, longitude: Double((userAddress.longitude)!)!)
         
-        //let clientLocation = CLLocation(latitude:13.025232483644993, longitude:77.65087198473294) //For SPT //FOR SIMULATOR
+        //let location = CLLocation(latitude:13.025232483644993, longitude:77.65087198473294) //For SPT //FOR SIMULATOR
         
-        let location = CLLocation(latitude:12.9615402 , longitude: 77.6441973) //For geekSkool//FOR SIMULATOR
+        //let location = CLLocation(latitude:12.9615402 , longitude: 77.6441973) //For geekSkool//FOR SIMULATOR
         
         
         

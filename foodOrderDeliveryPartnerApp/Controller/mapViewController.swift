@@ -24,7 +24,7 @@ class mapViewController: UIViewController
     {
         super.viewDidLoad()
     
-        clientLocation = Location(latitude:"12.9615402" , longitude: "77.6441973") //For geekSkool//DELETE AFTER TESTING
+        //clientLocation = Location(latitude:"12.9615402" , longitude: "77.6441973") //For geekSkool//DELETE AFTER TESTING
         
         getDirections(restaurantLocation!, "Restaurant")
     }

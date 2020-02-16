@@ -24,6 +24,8 @@ class loginViewController: UIViewController
         setTitleLabelUI()
         setViewLogin()
         setTextDelegate()
+        
+        timerStarted = false //fEB 14TH
     }
 
     func setTitleLabelUI()
