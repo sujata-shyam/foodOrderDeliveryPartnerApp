@@ -19,13 +19,9 @@ class mapViewController: UIViewController
     var clientLocation: Location? //Value passed from prev.View Controller thru. segue
     var restaurantLocation: Location? //Value passed from prev.View Controller thru. segue
     
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-    
-        //clientLocation = Location(latitude:"12.9615402" , longitude: "77.6441973") //For geekSkool//DELETE AFTER TESTING
-        
         getDirections(restaurantLocation!, "Restaurant")
     }
         

@@ -15,7 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
-        LocationManager.shared.start()   
+        NetworkCheck.sharedInstance.startMonitoring()
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("gotInternetConnection"), object: nil, queue: nil) { notification in
+            
+            DispatchQueue.main.async {
+                LocationManager.shared.start()
+            }
+        }
         return true
     }
 
@@ -27,8 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func applicationWillTerminate(_ application: UIApplication)
     {
         SocketIOManager.sharedInstance.closeConnection()
-        
-        //////Feb 11th
         LocationManager.shared.stop()
     }
 }

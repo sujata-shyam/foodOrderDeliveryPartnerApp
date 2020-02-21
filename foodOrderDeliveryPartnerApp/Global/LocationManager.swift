@@ -50,26 +50,15 @@ class LocationManager: NSObject, CLLocationManagerDelegate
         {
             currentLocation = location
             
-            //if defaults.bool(forKey: "isUserLoggedIn")
-            //{
-                SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude:"\(location.coordinate.longitude)")
-                
-                if(timerStarted == false)
-                {
-                    timer = Timer.scheduledTimer(withTimeInterval: 20, repeats: true) { timer in
-                        print("TIMER STARTED")
-                        SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude:"\(location.coordinate.longitude)")
-                    }
-                    timerStarted = true
-                }
-            //}
+            SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude:"\(location.coordinate.longitude)")
             
-            /*
-            defaults.set("\(location.coordinate.latitude)", forKey: "initialLatitude")
-            defaults.set("\(location.coordinate.longitude)", forKey: "initialLongitude")
-            print("initialLatitude: \(location.coordinate.latitude)")
-            print("initialLongitude: \(location.coordinate.longitude)")
-            */
+            if(timerStarted == false)
+            {
+                timer = Timer.scheduledTimer(withTimeInterval: 20, repeats: true) { timer in
+                    SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude:"\(location.coordinate.longitude)")
+                }
+                timerStarted = true
+            }
         }
     }
     
@@ -111,6 +100,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate
         }
         
         locationManager.startUpdatingLocation()
-        //locationManager.requestLocation()//Commented on 11th Feb
+        //locationManager.requestLocation()
     }
 }

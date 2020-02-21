@@ -25,7 +25,7 @@ class loginViewController: UIViewController
         setViewLogin()
         setTextDelegate()
         
-        timerStarted = false //fEB 14TH
+        timerStarted = false
     }
 
     func setTitleLabelUI()
@@ -67,6 +67,7 @@ class loginViewController: UIViewController
         }
         else
         {
+            startActivityIndicator(vc: self)
             loadLoginData(txtPhone.text!)
         }
         txtPhone.resignFirstResponder()
@@ -74,7 +75,7 @@ class loginViewController: UIViewController
     
     func loadLoginData(_ txtPhone: String)
     {
-        let searchURL = URL(string: "https://tummypolice.iyangi.com/api/v1/deliverypartner/login")
+        let searchURL = URL(string: "\(urlMainString)/deliverypartner/login")
         var searchURLRequest = URLRequest(url: searchURL!)
         
         searchURLRequest.httpMethod = "POST"
@@ -114,24 +115,6 @@ class loginViewController: UIViewController
                         if(SocketIOManager.sharedInstance.socket.status == .connected)
                         {
                        SocketIOManager.sharedInstance.emitActiveDeliveryPartner(loginResponse.id!)
-                            
-                            //Below commented on 11th Feb
-                            //Code for emitting Location Update on Login
-                            /*
-                            if let initialLat = defaults.string(forKey: "initialLatitude"), let initialLong = defaults.string(forKey: "initialLongitude")
-                            {
-                                SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
-                                
-                            DispatchQueue.main.async
-                            {
-                                timer = Timer.scheduledTimer(withTimeInterval: 20, repeats: true) { timer in
-                                    
-                                    print("TIMER STARTED")
-                                    SocketIOManager.sharedInstance.emitLocationUpdate(dpLatitude: initialLat, dpLongitude:initialLong)
-                                }
-                                }
-                            }
-                            */
                         }
                         else
                         {
@@ -141,6 +124,7 @@ class loginViewController: UIViewController
                         DispatchQueue.main.async
                         {
                             self.clearUIFields()
+                            stopActivityIndicator(vc: self)
                             self.performSegue(withIdentifier: "goToOrderDetails", sender: self)
                         }
                     }
@@ -148,6 +132,7 @@ class loginViewController: UIViewController
                     {
                         DispatchQueue.main.async
                         {
+                            stopActivityIndicator(vc: self)
                             displayAlertForSettings()
                         }
                     }
@@ -156,12 +141,14 @@ class loginViewController: UIViewController
                 {
                     DispatchQueue.main.async
                     {
+                        stopActivityIndicator(vc: self)
                         displayAlert(vc: self, title: "Failed Login Attempt", message: "Login ID does not exist")
                     }
                 }
             }
             catch
             {
+                stopActivityIndicator(vc: self)
                 print(error)
             }
         }.resume()
@@ -185,80 +172,3 @@ extension loginViewController:UITextFieldDelegate
         return true
     }
 }
-
-//extension loginViewController:CLLocationManagerDelegate
-//{
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
-//    {
-//        retrieveCurrentLocation()
-//    }
-//
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
-//    {
-//        if let location = locations.last
-//        {
-//            SocketIOManager.sharedInstance.onLocationUpdate(dpLatitude: "\(location.coordinate.latitude)", dpLongitude: "\(location.coordinate.longitude)")
-//        }
-//    }
-//
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
-//    {
-//        if let clErr = error as? CLError
-//        {
-//            switch clErr
-//            {
-//            case CLError.locationUnknown:
-//                print("Error Location Unknown")
-//            case CLError.denied:
-//                displayAlertForSettings()
-//            default:
-//                print("other Core Location error")
-//            }
-//        }
-//        else
-//        {
-//            print("other error:", error.localizedDescription)
-//        }
-//    }
-//
-//    func retrieveCurrentLocation()
-//    {
-//        let status = CLLocationManager.authorizationStatus()
-//
-//        if(status == .denied || status == .restricted || !CLLocationManager.locationServicesEnabled())
-//        {
-//            displayAlertForSettings()
-//            return
-//        }
-//
-//        if(status == .notDetermined)
-//        {
-//            locationManager.requestAlwaysAuthorization()
-//            return
-//        }
-//
-//        locationManager.startUpdatingLocation()
-//    }
-//
-//    func displayAlertForSettings()
-//    {
-//        let alertController = UIAlertController (title: "The app needs access to your location to function.", message: "Go to Settings?", preferredStyle: .alert)
-//
-//        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
-//            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-//                return
-//            }
-//
-//            if UIApplication.shared.canOpenURL(settingsUrl) {
-//                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-//                    print("Settings opened: \(success)") // Prints true
-//                })
-//            }
-//        }
-//        alertController.addAction(settingsAction)
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-//        alertController.addAction(cancelAction)
-//
-//        present(alertController, animated: true, completion: nil)
-//    }
-//}

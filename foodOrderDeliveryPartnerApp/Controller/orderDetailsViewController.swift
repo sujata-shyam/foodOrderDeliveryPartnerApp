@@ -32,14 +32,11 @@ class orderDetailsViewController: UIViewController
     
     @objc func handleIncomingOrder(notification: Notification)
     {
+        startActivityIndicator(vc: self)
         let orderDetail = notification.object as! [OrderDetail]        
         
         if let orderID = orderDetail.first?.orderId
         {
-//            timer?.invalidate()
-//            timer = nil
-//            print("TIMER INVALIDATED")
-            
             self.orderId = orderID
             
             if let restaurantID = orderDetail.first?.restaurantId
@@ -90,8 +87,8 @@ class orderDetailsViewController: UIViewController
                     ])
                 
                 title.append(body)
-                
                 self.txtViewDetails.attributedText = title
+                stopActivityIndicator(vc: self)
             }
         }
         else
@@ -100,15 +97,16 @@ class orderDetailsViewController: UIViewController
             {
                 self.lblNoOrder.isHidden = false
                 self.viewOrderDetails.isHidden = true
+                stopActivityIndicator(vc: self)
             }
         }
     }
     
     func getRestaurantDetails(_ restaurantId: String)
     {
-        let urlString = "https://tummypolice.iyangi.com/api/v1/restaurant/info?id=\(restaurantId)"
+        //let urlString = "\(urlMainString)/restaurant/info?id=\(restaurantId)"
         
-        let url = URL(string: urlString)
+        let url = URL(string: "\(urlMainString)/restaurant/info?id=\(restaurantId)")
         
         if let url = url{
             let task = URLSession.shared.dataTask(with: url){ (data, response, error) in
@@ -159,8 +157,6 @@ class orderDetailsViewController: UIViewController
         
         //let location = CLLocation(latitude:12.9615402 , longitude: 77.6441973) //For geekSkool//FOR SIMULATOR
         
-        
-        
         CLGeocoder().reverseGeocodeLocation(location, preferredLocale: .autoupdatingCurrent) { (clPlacemark: [CLPlacemark]?, error: Error?) in
             guard let place = clPlacemark?.first else {
                 print("No placemark from Apple: \(String(describing: error))")
@@ -193,12 +189,8 @@ class orderDetailsViewController: UIViewController
         if(orderId != nil)
         {
             SocketIOManager.sharedInstance.emitTaskAcception(self.orderId!)
-            /////
             timer?.invalidate()
             timer = nil
-            print("TIMER INVALIDATED")
-            /////
-            
             performSegue(withIdentifier: "goToMaps", sender: self)
         }
     }
@@ -212,9 +204,4 @@ class orderDetailsViewController: UIViewController
             mapVC.restaurantLocation = self.restaurantLocation
         }
     }
-    
-
-    
-
-    
 }
